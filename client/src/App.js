@@ -1,20 +1,26 @@
 import "./styles.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Signup } from "./pages/signup"
 import { Main } from "./pages/main"
 import { Signin } from "./pages/signin"
+import { Protected } from "./pages/protected"
+import { AuthContext } from "./context/authContext"
 
 function App() {
+  const [token, setToken] = useState("")
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/signin' element={<Signin />} />
-        </Routes>
-      </Router>
+      <AuthContext.Provider value={{token, setToken}}>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/signin' element={<Signin />} />
+            <Route path='/protected' element={<Protected />} />
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
     </div>
   )
 }
