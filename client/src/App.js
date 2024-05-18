@@ -5,13 +5,13 @@ import { Signup } from "./pages/signup"
 import { Main } from "./pages/main"
 import { Signin } from "./pages/signin"
 import { Protected } from "./pages/protected"
-import { AuthContext } from "./context/authContext"
+import { AuthContext, AuthContextProvider } from "./context/authContext"
 
 function App() {
-  const [token, setToken] = useState("")
+
   return (
     <div>
-      <AuthContext.Provider value={{token, setToken}}>
+      <AuthContextProvider>
         <Router>
           <Routes>
             <Route path='/' element={<Main />} />
@@ -20,7 +20,7 @@ function App() {
             <Route path='/protected' element={<Protected />} />
           </Routes>
         </Router>
-      </AuthContext.Provider>
+      </AuthContextProvider>
     </div>
   )
 }
