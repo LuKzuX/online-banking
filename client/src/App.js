@@ -5,13 +5,18 @@ import { Signup } from "./pages/signup"
 import { Main } from "./pages/main"
 import { Signin } from "./pages/signin"
 import { Protected } from "./pages/protected"
-import { AuthContext, AuthContextProvider } from "./context/authContext"
+import { AuthContext } from "./context/authContext"
 
 function App() {
+  const [token, setToken] = useState("")
 
+  useEffect(() => {
+    const savedToken = localStorage.getItem("user")
+    setToken(savedToken)
+  }, [])
   return (
     <div>
-      <AuthContextProvider>
+      <AuthContext.Provider value={{ token, setToken }}>
         <Router>
           <Routes>
             <Route path='/' element={<Main />} />
@@ -20,7 +25,7 @@ function App() {
             <Route path='/protected' element={<Protected />} />
           </Routes>
         </Router>
-      </AuthContextProvider>
+      </AuthContext.Provider>
     </div>
   )
 }

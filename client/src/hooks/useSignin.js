@@ -11,6 +11,7 @@ export const useSignin = () => {
     try {
       const res = await axios.post('/bank/signin', {username, password})
       localStorage.setItem('user', JSON.stringify(res))
+      setToken(res)
       navigate('/protected')
     } catch (error) {
       console.log(error);
