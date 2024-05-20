@@ -32,11 +32,13 @@ export const loginUser = async (req, res) => {
   }
 }
 
-export const protectedd = async (req, res) => {
+export const protectedd = async (req, res, next) => {
   try {
-    res.send(req.user)
+    const { _id } = req.user
+    const user = await User.findById({_id})
+    res.send(user)
   } catch (error) {
-    res.send(error) 
+    next(error)
   }
 }
 

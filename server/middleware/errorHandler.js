@@ -11,4 +11,7 @@ export const errorHandlerMiddleware = (err, req, res, next) => {
   if (err.code == 11000) {
     return res.send(`This ${Object.keys(err.keyValue)} already exists`)
   }
+  else{
+    return res.send(err)
+  }
 }
