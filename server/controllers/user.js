@@ -26,7 +26,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).send("this user does not exist")
     }
     const token = jwt.sign({user}, process.env.SECRET)
-    return res.json(token)
+    return res.json({user, token})
   } catch (error) {
     return res.status(401).send(error)
   }
