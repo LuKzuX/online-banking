@@ -1,9 +1,11 @@
-import { createContext } from "react"
+import { createContext, useContext } from "react"
 import { useEffect, useState } from "react"
 
-export const AuthContext = createContext()
+export const AuthContext = createContext({})
 
-export const useAuthContext = createContext(AuthContext)
+export const useAuthContext = () =>{
+  return useContext(AuthContext)
+}
 
 export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState("")

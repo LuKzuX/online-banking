@@ -12,6 +12,7 @@ export const errorHandlerMiddleware = (err, req, res, next) => {
     return res.send(`This ${Object.keys(err.keyValue)} already exists`)
   }
   else{
+    console.log(err);
     return res.send(err)
   }
 }
