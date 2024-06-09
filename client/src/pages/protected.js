@@ -5,6 +5,7 @@ import axios from "axios"
 export const Protected = () => {
   const { token } = useAuthContext()
   const [user, setUser] = useState(null)
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -13,7 +14,7 @@ export const Protected = () => {
             Authorization: `Bearer ${token.data.token}`,
           },
         })
-        setUser(res)
+        setUser(res.data)
       } catch (error) {
         console.log(error)
       }
@@ -22,7 +23,7 @@ export const Protected = () => {
   }, [token])
   return (
     <div className=''>
-      {console.log(token)}
+      {user && console.log(user)}
       {user && (
         <div className=''>
           <p>sss</p>
