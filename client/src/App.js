@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Signup } from "./pages/signup"
 import { Main } from "./pages/main"
 import { Signin } from "./pages/signin"
-import { Protected } from "./pages/protected"
+import { Protected } from "./pages/home"
 import { AuthContextProvider } from "./context/authContext"
 
 function App() {

@@ -32,7 +32,7 @@ export const loginUser = async (req, res) => {
   }
 }
 
-export const protectedd = async (req, res, next) => {
+export const home = async (req, res, next) => {
   try {
     const { _id } = req.user.user
     const user = await User.findById({_id})

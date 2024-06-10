@@ -2,14 +2,14 @@ import { useAuthContext } from "../context/authContext"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export const Protected = () => {
+export const useHomepage = () => {
   const { token } = useAuthContext()
   const [user, setUser] = useState(null)
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("/bank/protected", {
+        const res = await axios.get("/bank/home", {
           headers: {
             Authorization: `Bearer ${token.data.token}`,
           },
@@ -21,14 +21,7 @@ export const Protected = () => {
     }
     getData()
   }, [token])
-  return (
-    <div className=''>
-      {user && console.log(user)}
-      {user && (
-        <div className=''>
-          <p>sss</p>
-        </div>
-      )}
-    </div>
-  )
+
+  return { user }
 }
+
