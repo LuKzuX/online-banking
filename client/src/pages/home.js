@@ -1,10 +1,10 @@
 import { useAuthContext } from "../context/authContext"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { useHomepage } from "../hooks/useHomepage"
+import { useGetCurrentUser } from "../hooks/useGetCurrentUser"
 
-export const Protected = () => {
+export const Home = () => {
   const { token } = useAuthContext()
-  const { user } = useHomepage()
-  return <div className=''>{user && console.log(user.balance)}</div>
+  const { user } = useGetCurrentUser()
+  return  <div className=''>{user && user.balance}</div>
 }

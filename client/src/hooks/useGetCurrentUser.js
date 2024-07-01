@@ -2,7 +2,7 @@ import { useAuthContext } from "../context/authContext"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export const useHomepage = () => {
+export const useGetCurrentUser = () => {
   const { token } = useAuthContext()
   const [user, setUser] = useState(null)
 
@@ -17,7 +17,7 @@ export const useHomepage = () => {
         setUser(res.data)
       } catch (error) {
         console.log(error)
-      }
+      } 
     }
     getData()
   }, [token])
