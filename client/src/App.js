@@ -10,12 +10,10 @@ import Navbar from "./components/Navbar";
 import { useAuthContext } from "./context/authContext";
 
 function App() {
-  const { token } = useAuthContext();
-  console.log(token);
   return (
     <div>
       <Router>
-        {token && <Navbar />}
+        <Navbar />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
