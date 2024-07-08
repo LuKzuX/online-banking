@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .image-transition {
     transition: width 0.5s ease-in-out;
   }
