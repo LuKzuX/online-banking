@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { LuDot } from "react-icons/lu";
 import mainImage from "../images/main-image.avif";
 import mainImage2 from "../images/main-image.png";
 import mainImage3 from "../images/main-image.jpg";
@@ -43,7 +44,7 @@ export const useCarousel = () => {
       link: "",
       title: "Title Four",
       text: "Lorem ipsum dolor sit ",
-      textTwo: `consectetur adipiscing elit, `,
+      textTwo: `consectetur adipiscing elit `,
     },
   ];
 
@@ -56,6 +57,13 @@ export const useCarousel = () => {
       prev == 0 ? (prev = arr.length - 1) : prev - 1
     );
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      advance();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative flex h-screen w-full overflow-hidden text-white text-xl">
@@ -79,22 +87,44 @@ export const useCarousel = () => {
                 <h1>{textArr[index].textTwo}</h1>
               </div>
             </div>
-            <button className="border py-3 px-6 rounded-xl">{textArr[index].bText}</button>
+            <button className="border py-3 px-6 rounded-xl">
+              {textArr[index].bText}
+            </button>
           </div>
         </div>
       ))}
-      <div className="absolute flex gap-6 justify-center w-screen bottom-[42%] text-white">
+      <div className="absolute flex gap-2 justify-center items-center w-screen bottom-[42%] text-white">
         <button onClick={retreat}>
-          <MdOutlineKeyboardArrowLeft
-            size={40}
-            className="p-1 bg-white/[.4] rounded-3xl"
-          />
+          <MdOutlineKeyboardArrowLeft size={40} className="rounded-3xl" />
         </button>
+        <div className="flex">
+          <p
+            onClick={() => setCurrentPosition(0)}
+            className={`opacity-50 ${currentPosition == 0 && "opacity-100"}`}
+          >
+            <LuDot size={40} />
+          </p>
+          <p
+            onClick={() => setCurrentPosition(1)}
+            className={`opacity-50 ${currentPosition == 1 && "opacity-100"}`}
+          >
+            <LuDot size={40} />
+          </p>
+          <p
+            onClick={() => setCurrentPosition(2)}
+            className={`opacity-50 ${currentPosition == 2 && "opacity-100"}`}
+          >
+            <LuDot size={40} />
+          </p>
+          <p
+            onClick={() => setCurrentPosition(3)}
+            className={`opacity-50 ${currentPosition == 3 && "opacity-100"}`}
+          >
+            <LuDot size={40} />
+          </p>
+        </div>
         <button onClick={advance}>
-          <MdOutlineKeyboardArrowRight
-            size={40}
-            className="p-1 bg-white/[.4] rounded-3xl"
-          />
+          <MdOutlineKeyboardArrowRight size={40} className="rounded-3xl" />
         </button>
       </div>
     </div>
