@@ -4,9 +4,11 @@
 
 
 .image-transition {
-    transition: width 0.5s ease-in-out;
-  }
+  transition: width 0.5s ease-in-out;
+}
 
 .main-color{
   background-color: rgb(255, 98, 0, 1);
 }
+
+

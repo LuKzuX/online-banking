@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
-import mainImage from "../images/main-image.avif";
-import mainImage2 from "../images/main-image.png";
-import mainImage3 from "../images/main-image.jpg";
-import mainImage4 from "../images/main-image.webp";
+import mainImage from "../images/main-image-1.jpg";
+import mainImage2 from "../images/main-image-2.jpg";
+import mainImage3 from "../images/main-image-3.jpg";
+import mainImage4 from "../images/main-image-4.jpg";
 
 export const useCarousel = () => {
   const [currentPosition, setCurrentPosition] = useState(0);
@@ -66,13 +66,13 @@ export const useCarousel = () => {
   }, []);
 
   return (
-    <div className="relative flex h-screen w-full overflow-hidden text-white text-xl">
+    <div className="relative flex h-screen w-full overflow-hidden text-white text-xl transition-transform duration-1000">
       {arr.map((image, index) => (
         <div
           key={index}
           className={`relative flex-shrink-0 transition-transform duration-500`}
           style={{
-            transform: `translateX(-${currentPosition * 100}%) `,
+            transform: `${currentPosition ? `translateX(-${currentPosition * 100}%)` : ``}`,
           }}
         >
           <img
@@ -82,7 +82,7 @@ export const useCarousel = () => {
           <div className="absolute flex flex-col items-start gap-16 top-[15%] px-5">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold">{textArr[index].title}</h1>
-              <div className="flex-flex-col text-xl">
+              <div className="flex flex-col text-xl">
                 <h2>{textArr[index].text}</h2>
                 <h1>{textArr[index].textTwo}</h1>
               </div>
@@ -100,25 +100,25 @@ export const useCarousel = () => {
         <div className="flex">
           <p
             onClick={() => setCurrentPosition(0)}
-            className={`opacity-50 ${currentPosition == 0 && "opacity-100"}`}
+            className={`${currentPosition == 0 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
             onClick={() => setCurrentPosition(1)}
-            className={`opacity-50 ${currentPosition == 1 && "opacity-100"}`}
+            className={`${currentPosition == 1 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
             onClick={() => setCurrentPosition(2)}
-            className={`opacity-50 ${currentPosition == 2 && "opacity-100"}`}
+            className={`${currentPosition == 2 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
             onClick={() => setCurrentPosition(3)}
-            className={`opacity-50 ${currentPosition == 3 && "opacity-100"}`}
+            className={`${currentPosition == 3 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>

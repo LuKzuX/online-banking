@@ -7,20 +7,6 @@ export const Main = () => {
   return (
     <div className="">
       {useCarousel()}
-      <button
-        onClick={() => {
-          navigate("/signup");
-        }}
-      >
-        Signup
-      </button>
-      <button
-        onClick={() => {
-          navigate("/signin");
-        }}
-      >
-        Signin
-      </button>
     </div>
   );
 };
