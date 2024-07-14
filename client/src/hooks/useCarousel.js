@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
@@ -9,7 +9,7 @@ import mainImage4 from "../images/main-image-4.jpg";
 
 export const useCarousel = () => {
   const [currentPosition, setCurrentPosition] = useState(0);
-  const [intervalTime, setIntervalTime] = useState(1000);
+  const intervalRef = useRef(null);
   const [arr, setArr] = useState([
     mainImage,
     mainImage2,
@@ -49,7 +49,11 @@ export const useCarousel = () => {
   ];
 
   const advance = () => {
+    clearInterval(intervalRef.current);
     setCurrentPosition((prev) => (prev + 1) % arr.length);
+    intervalRef.current = setInterval(() => {
+      advance();
+    }, 5000);
   };
 
   const retreat = () => {
@@ -59,25 +63,27 @@ export const useCarousel = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       advance();
     }, 5000);
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalRef.current);
   }, []);
 
   return (
-    <div className="relative flex h-screen w-full overflow-hidden text-white text-xl transition-transform duration-1000">
+    <div className="relative flex h-[28rem] w-full overflow-hidden text-white text-xl transition-transform duration-1000">
       {arr.map((image, index) => (
         <div
           key={index}
           className={`relative flex-shrink-0 transition-transform duration-500`}
           style={{
-            transform: `${currentPosition ? `translateX(-${currentPosition * 100}%)` : ``}`,
+            transform: `${
+              currentPosition ? `translateX(-${currentPosition * 100}%)` : ``
+            }`,
           }}
         >
           <img
             src={image}
-            className="h-3/5 w-screen object-cover brightness-50"
+            className="relative h-full w-screen object-cover brightness-50"
           />
           <div className="absolute flex flex-col items-start gap-16 top-[15%] px-5">
             <div className="flex flex-col gap-2">
@@ -93,7 +99,7 @@ export const useCarousel = () => {
           </div>
         </div>
       ))}
-      <div className="absolute flex gap-2 justify-center items-center w-screen bottom-[42%] text-white">
+      <div className="absolute flex gap-2 justify-center items-center w-screen bottom-[5%] text-white">
         <button onClick={retreat}>
           <MdOutlineKeyboardArrowLeft size={40} className="rounded-3xl" />
         </button>

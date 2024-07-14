@@ -8,14 +8,17 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu1 = () => {
     if (isMenuOpen == false) {
       document.body.style.overflow = "hidden";
-      isMenuOpen(true);
+      setIsMenuOpen(true);
     } else {
-      isMenuOpen(false);
+      setIsMenuOpen(false);
       document.body.style.overflow = "auto";
     }
+  };
+
+  const toggleMenu2 = () => {
     if (isUserMenuOpen == false) {
       document.body.style.overflow = "hidden";
       setIsUserMenuOpen(true);
@@ -28,23 +31,26 @@ const Navbar = () => {
   return (
     <div className="flex main-color text-white text-xl font-bold px-5 py-4">
       <BsBank2 className="self-center" size={50} />
-      <div className="flex items-center ml-auto gap-3">
-        <button className="px-5 py-3 rounded-xl border">Open account</button>
-        <BsPerson onClick={toggleMenu} size={30} className="" />
+      <div className="flex items-center ml-auto gap-8 font-semibold">
+        <BsPerson onClick={toggleMenu2} size={30} className="" />
         <div
           className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-between h-full z-10 transition-transform duration-500 
             ${isUserMenuOpen ? "translate-x-0" : "translate-x-[100%]"}`}
         >
-          <IoMdClose onClick={toggleMenu} size={40} className="self-end" />
-          <p>apiyot08g7</p>
-          <p>apiyot08g7</p>
+          <IoMdClose onClick={toggleMenu2} size={40} className="self-end" />
+          <p className="mb-[-40%]">Login</p>
+          <p className="mb-[80%]">Signup</p>
         </div>
-        <RiMenu5Line size={30} onClick={toggleMenu} />
+        <RiMenu5Line size={30} onClick={toggleMenu1} />
         <div
           className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-between h-full z-10 transition-transform duration-500 
             ${isMenuOpen ? "translate-x-0" : "translate-x-[100%]"}`}
         >
-          <IoMdClose onClick={toggleMenu} size={40} className="self-end" />
+          <IoMdClose
+            onClick={toggleMenu1}
+            size={40}
+            className="self-end font-thin"
+          />
           <p>Why choose Us</p>
           <p>Services</p>
           <p>Where we Work</p>
