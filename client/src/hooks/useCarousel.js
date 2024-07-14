@@ -89,7 +89,7 @@ export const useCarousel = () => {
             src={image}
             className="relative h-full w-screen object-cover brightness-50"
           />
-          <div className="absolute flex flex-col items-start gap-16 top-[15%] px-5">
+          <div className="absolute flex flex-col items-start gap-16 top-[25%] px-5">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold">{textArr[index].title}</h1>
               <div className="flex flex-col text-xl">
