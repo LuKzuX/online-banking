@@ -5,6 +5,7 @@ import { FaCreditCard } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { FaNewspaper } from "react-icons/fa6";
+import Footer from "../components/Footer";
 export const Main = () => {
   const navigate = useNavigate();
 
@@ -33,6 +34,7 @@ export const Main = () => {
           <p className="text-lg">lorem ipsum dolor sit amet consectetur </p>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -57,9 +57,13 @@ export const useCarousel = () => {
   };
 
   const retreat = () => {
+    clearInterval(intervalRef.current);
     setCurrentPosition((prev) =>
       prev == 0 ? (prev = arr.length - 1) : prev - 1
     );
+    intervalRef.current = setInterval(() => {
+      advance();
+    }, 5000);
   };
 
   useEffect(() => {
@@ -105,25 +109,49 @@ export const useCarousel = () => {
         </button>
         <div className="flex">
           <p
-            onClick={() => setCurrentPosition(0)}
+            onClick={() => {
+              clearInterval(intervalRef.current);
+              setCurrentPosition(0);
+              intervalRef.current = setInterval(() => {
+                advance();
+              }, 5000);
+            }}
             className={`${currentPosition == 0 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
-            onClick={() => setCurrentPosition(1)}
+            onClick={() => {
+              clearInterval(intervalRef.current);
+              setCurrentPosition(1);
+              intervalRef.current = setInterval(() => {
+                advance();
+              }, 5000);
+            }}
             className={`${currentPosition == 1 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
-            onClick={() => setCurrentPosition(2)}
+            onClick={() => {
+              clearInterval(intervalRef.current);
+              setCurrentPosition(2);
+              intervalRef.current = setInterval(() => {
+                advance();
+              }, 5000);
+            }}
             className={`${currentPosition == 2 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
           </p>
           <p
-            onClick={() => setCurrentPosition(3)}
+            onClick={() => {
+              clearInterval(intervalRef.current);
+              setCurrentPosition(3);
+              intervalRef.current = setInterval(() => {
+                advance();
+              }, 5000);
+            }}
             className={`${currentPosition == 3 ? "opacity-100" : "opacity-50"}`}
           >
             <LuDot size={40} />
