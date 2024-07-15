@@ -13,22 +13,25 @@ export const Signin = () => {
 
 
   return (
-    <div className=''>
-      <form className=''>
-        <input
-          placeholder='username'
-          onChange={(e) => {
-            setUsername(e.target.value)
-          }}
-        ></input>
-        <input
-          placeholder='password'
-          onChange={(e) => {
-            setPassword(e.target.value)
-          }}
-        ></input>
-        <button onClick={handleSubmit}>signin</button>
-      </form>
-    </div>
+    <div className="flex flex-col justify-center items-center">
+    <h1 className="mt-10 text-4xl font-semibold">Signin</h1>
+    <form className="mt-10 border-2 border-neutral-800 rounded-xl flex flex-col gap-8 items-center p-6">
+      <input
+        className="border-b p-2"
+        placeholder="username"
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+      ></input>
+      <input
+        className="border-b p-2" 
+        placeholder="password"
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+      ></input>
+      <button onClick={handleSubmit}>Signup</button>
+    </form>
+  </div>
   )
 }

@@ -3,8 +3,10 @@ import { RiMenu5Line } from "react-icons/ri";
 import { BsBank2 } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
@@ -29,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex main-color text-white text-xl font-bold px-5 py-4">
+    <div className="w-full z-30 flex main-color text-white text-xl font-bold px-5 py-4">
       <BsBank2 className="self-center" size={50} />
       <div className="flex items-center ml-auto gap-8 font-semibold">
         <BsPerson onClick={toggleMenu2} size={30} className="" />
@@ -38,8 +40,24 @@ const Navbar = () => {
             ${isUserMenuOpen ? "translate-x-0" : "translate-x-[100%]"}`}
         >
           <IoMdClose onClick={toggleMenu2} size={40} className="self-end" />
-          <p className="mb-[-40%]">Login</p>
-          <p className="mb-[80%]">Signup</p>
+          <p
+            className="mb-[-40%]"
+            onClick={() => {
+              toggleMenu2();
+              navigate("/signin");
+            }}
+          >
+            Login
+          </p>
+          <p
+            className="mb-[80%]"
+            onClick={() => {
+              toggleMenu2();
+              navigate("/signup");
+            }}
+          >
+            Signup
+          </p>
         </div>
         <RiMenu5Line size={30} onClick={toggleMenu1} />
         <div
