@@ -7,4 +7,4 @@ import {verifyAdmin} from "../middleware/verifyAdmin.js"
 router.post(`/signup`, createUser)
 router.post(`/signin`, loginUser)  
 
-router.get("/home", userAuth, verifyAdmin, home)
+router.get("/home", userAuth, home)
