@@ -1,32 +1,32 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   phone: {
     type: Number,
     required: true,
-    unique: true
+    unique: true,
   },
   balance: {
     type: Number,
-    required: true
+    required: true,
   },
   contacts: {
     type: Array,
-    required: true
+    required: true,
   },
   isAdmin: {
     type: Boolean,
-    required: true
+    required: true,
   },
-})
+});
 
-export const User = mongoose.model("Users", userSchema) 
+export const User = mongoose.model("Users", userSchema);

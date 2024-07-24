@@ -38,42 +38,40 @@ const Navbar = () => {
       <div className="flex items-center ml-auto gap-8 font-semibold">
         {!token && <BsPerson onClick={toggleMenu2} size={30} className="" />}
         <div
-          className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-between h-full z-10 transition-transform duration-500 
+          className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-evenly z-10 transition-transform duration-500 
             ${isUserMenuOpen ? "translate-x-0" : "translate-x-[100%]"}`}
         >
           <IoMdClose onClick={toggleMenu2} size={40} className="self-end" />
-          <p
-            className="mb-[-40%]"
-            onClick={() => {
-              toggleMenu2();
-              navigate("/signin");
-            }}
-          >
-            Login
-          </p>
-          <p
-            className="mb-[80%]"
-            onClick={() => {
-              toggleMenu2();
-              navigate("/signup");
-            }}
-          >
-            Signup
-          </p>
+          <div className="flex flex-col h-screen items-center justify-evenly">
+            <p
+              className=""
+              onClick={() => {
+                toggleMenu2();
+                navigate("/signin");
+              }}
+            >
+              Login
+            </p>
+            <p
+              className=""
+              onClick={() => {
+                toggleMenu2();
+                navigate("/signup");
+              }}
+            >
+              Signup
+            </p>
+          </div>
         </div>
         <RiMenu5Line size={30} onClick={toggleMenu1} />
         <div
-          className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-between z-10 transition-transform duration-500 
+          className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center  z-10 transition-transform duration-500 
             ${isMenuOpen ? "translate-x-0" : "translate-x-[100%]"}`}
         >
-          <IoMdClose
-            onClick={toggleMenu1}
-            size={40}
-            className="self-end font-thin"
-          />
+          <IoMdClose onClick={toggleMenu1} size={40} className="self-end" />
           {!token && (
-            <div className=" flex flex-col items-center justify-center">
-              <p>Why choose Us</p>
+            <div className=" flex flex-col h-screen items-center justify-evenly">
+              <p className="">Why choose Us</p>
               <p>Services</p>
               <p>Where we Work</p>
               <p>Socials</p>
@@ -81,8 +79,8 @@ const Navbar = () => {
             </div>
           )}
           {token && (
-            <div>
-              <p onClick={() =>  navigate('/home')}>Home</p>
+            <div className=" flex flex-col h-screen items-center justify-evenly">
+              <p onClick={() => navigate("/home")}>Home</p>
               <p>Transactions</p>
               <p>Contacts</p>
               <p>Logout</p>

@@ -9,7 +9,7 @@ export const useSignup = () => {
   const signup = async (username, password, phone) => {
     try {
       await axios.post("/bank/signup", { username, password, phone });
-      navigate("/bank/signin");
+      navigate("/signin");
     } catch (error) {
       setError(error.response.data);
     }

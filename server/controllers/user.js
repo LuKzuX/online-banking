@@ -1,4 +1,5 @@
 import { User } from "../models/userSchema.js";
+import { Card } from "../models/cardSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -13,6 +14,8 @@ export const createUser = async (req, res, next) => {
       phone,
       balance: 0,
       contacts: [],
+      transactions: [],
+      cards: [],
       isAdmin: false,
     });
     res.json(newUser);
@@ -40,12 +43,11 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const home = async (req, res, next) => {
+export const getUserInfo = async (req, res, next) => {
   try {
-    console.log(req.user);
     const { _id } = req.user.user;
-    const user = await User.findById({ _id });
-    res.send(user);
+    const user = await User.findById( _id );
+    res.json(user);
   } catch (error) {
     next(error);
   }
