@@ -30,9 +30,10 @@ export const addContact = async (req, res, next) => {
     const { phone } = req.body;
     const user = await User.findById(_id);
     const contactToAdd = await User.find({ phone });
-    user.contacts.push(contactToAdd);
-    await user.save();
-    res.send(user);
+    console.log(contactToAdd);
+    user.contacts.push(contactToAdd[0]._id)
+    await user.save()
+    res.send(user)
   } catch (error) {
     res.send(error);
   }

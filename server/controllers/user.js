@@ -1,12 +1,13 @@
 import { User } from "../models/userSchema.js";
 import { Card } from "../models/cardSchema.js";
+import { Transaction } from "../models/transactionSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export const createUser = async (req, res, next) => {
   try {
     const { username, password, phone } = req.body;
-    const salt = bcrypt.genSaltSync(10)
+    const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
     const newUser = await User.create({
       username,
@@ -44,9 +45,9 @@ export const loginUser = async (req, res) => {
 export const getUserInfo = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const user = await User.findById( _id );
-    const cards = await Card.find({createdBy: _id})
-    res.json({user, cards});
+    const user = await User.findById(_id);
+    const cards = await Card.find({ createdBy: _id });
+    res.json({ user, cards });
   } catch (error) {
     next(error);
   }
@@ -54,11 +55,17 @@ export const getUserInfo = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   try {
-    const {_id} = req.user.user
+    const { _id } = req.user.user;
     const deletedUser = await User.findByIdAndDelete(_id)
-    const users = User.find()
-    res.send(users)
+    const users = await User.find();
+    const transactions = await Transaction.find();
+    const cards = await Card.find();
+    for (const user of users) {
+      user.contacts = user.contacts.filter((prop) => prop.toString() !== _id);
+      await user.save();
+    }
+    res.send(users);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
+};

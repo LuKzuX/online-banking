@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -19,7 +19,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  contacts: [{type: Object, ref: 'User'}],
+  contacts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   isAdmin: {
     type: Boolean,
     required: true,
