@@ -5,7 +5,7 @@ import axios from "axios"
 export const useGetCurrentUser = () => {
   const { token } = useAuthContext()
   const [user, setUser] = useState(null)
-
+  
   useEffect(() => {
     const getData = async () => {
       try {

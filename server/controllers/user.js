@@ -47,7 +47,8 @@ export const getUserInfo = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
     const user = await User.findById( _id );
-    res.json(user);
+    const cards = await Card.find({createdBy: _id})
+    res.json({user, cards});
   } catch (error) {
     next(error);
   }

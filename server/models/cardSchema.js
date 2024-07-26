@@ -17,6 +17,11 @@ const cardSchema = new mongoose.Schema({
     required: true,
   },
 
+  isCredit: {
+    type: Boolean,
+    required: true
+  },
+
   expiresIn: {
     type: Date,
     required: true,

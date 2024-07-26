@@ -10,28 +10,63 @@ export const getAllCardInfo = async (req, res, next) => {
   }
 }
 
+export const getAllCardInfoSingle = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const card = await Card.findById(id)
+    res.send(card)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
 export const getCardInfo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const userCards = await Card.findById(id);
-    res.send(userCards);
+    const cards = await Card.findById(id);
+    res.send(cards);
   } catch (error) {
     res.send(error);
   }
 };
+
+
 export const createCard = async (req, res, next) => {
+  const securityCode = Math.floor(Math.random() * (999 - 10) + 10)
   try {
     const { _id } = req.user.user;
     const user = await User.findById(_id);
     const newCard = await Card.create({
       createdBy: user._id,
-      cardNumber: "92371203871230",
+      cardNumber: "92371203871230", //create function to generate random string
       cardHolder: user.username,
+      isCredit: false,
       expiresIn: Date.now(),
-      securityCode: "29",
+      securityCode: securityCode,
     });
     res.send(newCard);
   } catch (error) {
     res.send(error);
   }
 };
+
+export const updateCard = async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const card = await Card.findByIdAndUpdate(id, {$set: {cardNumber: 191172, expiresIn: Date.now()}}) //boilerplate
+    res.send(card)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
+
+export const deleteCard = async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const deletedCard = await Card.findByIdAndDelete(id)
+    res.send("deleted with success")
+  } catch (error) {
+    res.send(error)
+  }
+}
