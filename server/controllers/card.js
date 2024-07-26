@@ -10,20 +10,10 @@ export const getAllCardInfo = async (req, res, next) => {
   }
 }
 
-export const getAllCardInfoSingle = async (req, res, next) => {
+export const getUserCards = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const card = await Card.findById(id)
-    res.send(card)
-  } catch (error) {
-    res.send(error)
-  }
-}
-
-export const getCardInfo = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const cards = await Card.findById(id);
+    const {_id} = req.user.user
+    const cards = await Card.find({createdBy: _id});
     res.send(cards);
   } catch (error) {
     res.send(error);

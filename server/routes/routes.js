@@ -3,13 +3,12 @@ export const router = express.Router();
 import { createUser, loginUser, getUserInfo } from "../controllers/user.js";
 import {
   createCard,
-  getCardInfo,
   getAllCardInfo,
-  getAllCardInfoSingle,
+  getUserCards,
   updateCard,
   deleteCard
 } from "../controllers/card.js";
-import { addContact, payContact } from "../controllers/contact.js";
+import { addContact, payContact, getUserSingleContact, getUserContacts } from "../controllers/contact.js";
 import { userAuth } from "../middleware/userAuth.js";
 import { verifyAdmin } from "../middleware/verifyAdmin.js";
 
@@ -18,13 +17,14 @@ router.post(`/signup`, createUser);
 router.post(`/signin`, loginUser);
 router.get("/home", userAuth, getUserInfo);
 
-router.get("/all-cards", userAuth, verifyAdmin, getAllCardInfo);
-router.get("/all-cards/:id", userAuth, verifyAdmin, getAllCardInfoSingle);
-router.get("/cards/:id", userAuth, getCardInfo);
+router.get("/all-cards", userAuth, verifyAdmin, getAllCardInfo); 
+router.get("/cards", userAuth, getUserCards);
 router.post("/add-card", userAuth, createCard);
 router.patch("/cards/:id", userAuth, updateCard);
 router.delete("/cards/:id", userAuth, deleteCard)
 
+router.get("/contacts", userAuth, getUserContacts)
+router.get("/contacts/:phone", userAuth, getUserSingleContact)
 router.post("/add-contact", userAuth, addContact)
 router.post("/pay-contact/:phone", userAuth, payContact)
 
