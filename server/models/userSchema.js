@@ -19,14 +19,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  contacts: {
-    type: Array,
-    required: true,
-  },
+  contacts: [{type: Object, ref: 'User'}],
   isAdmin: {
     type: Boolean,
     required: true,
   },
 });
 
-export const User = mongoose.model("Users", userSchema);
+export const User = mongoose.model("User", userSchema);

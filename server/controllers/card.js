@@ -25,15 +25,18 @@ export const createCard = async (req, res, next) => {
   const securityCode = Math.floor(Math.random() * (999 - 10) + 10)
   try {
     const { _id } = req.user.user;
+    const {isCredit} = req.body
     const user = await User.findById(_id);
     const newCard = await Card.create({
       createdBy: user._id,
-      cardNumber: "92371203871230", //create function to generate random string
+      cardNumber: "923712038791230", //create function to generate random string
       cardHolder: user.username,
-      isCredit: false,
+      isCredit: isCredit,
       expiresIn: Date.now(),
       securityCode: securityCode,
     });
+    const sameUserCards = Card.filter((prop) => prop.createdBy == _id)
+    console.log(sameUserCards);
     res.send(newCard);
   } catch (error) {
     res.send(error);

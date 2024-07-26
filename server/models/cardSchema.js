@@ -7,9 +7,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
   },
   cardNumber: {
-    type: Number,
+    type: String,
     required: true,
-    unique: true,
   },
 
   cardHolder: {

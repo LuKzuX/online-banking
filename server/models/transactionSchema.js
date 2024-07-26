@@ -19,7 +19,12 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  transactionRemainingInstallments: {
+    type: Number,
+  },
+  transactionTimeInstallments: {
+    type: String,
+  },
 });
 
 export const Transaction = mongoose.model("Transactions", transactionSchema);
-

@@ -12,10 +12,8 @@ export const createUser = async (req, res, next) => {
       username,
       password: hashedPassword,
       phone,
-      balance: 0,
       contacts: [],
-      transactions: [],
-      cards: [],
+      balance: 0,
       isAdmin: false,
     });
     res.json(newUser);
@@ -53,3 +51,14 @@ export const getUserInfo = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteUser = async (req, res, next) => {
+  try {
+    const {_id} = req.user.user
+    const deletedUser = await User.findByIdAndDelete(_id)
+    const users = User.find()
+    res.send(users)
+  } catch (error) {
+    res.send(error)
+  }
+}

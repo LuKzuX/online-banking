@@ -6,7 +6,6 @@ const app = express()
 import { router } from "./routes/routes.js"
 import { errorHandlerMiddleware } from "./middleware/errorHandler.js"
 
-
 app.use(express.json())
 app.use(`/bank`, router)
 app.use(errorHandlerMiddleware)
@@ -21,5 +20,6 @@ const start = async () => {
     console.log(error)
   }
 }
+
 
 start() 

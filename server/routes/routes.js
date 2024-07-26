@@ -1,6 +1,6 @@
 import express from "express";
 export const router = express.Router();
-import { createUser, loginUser, getUserInfo } from "../controllers/user.js";
+import { createUser, loginUser, getUserInfo, deleteUser } from "../controllers/user.js";
 import {
   createCard,
   getAllCardInfo,
@@ -9,6 +9,7 @@ import {
   deleteCard
 } from "../controllers/card.js";
 import { addContact, payContact, getUserSingleContact, getUserContacts } from "../controllers/contact.js";
+import { newTransaction, getUserTransactions } from "../controllers/transaction.js";
 import { userAuth } from "../middleware/userAuth.js";
 import { verifyAdmin } from "../middleware/verifyAdmin.js";
 
@@ -16,6 +17,7 @@ import { verifyAdmin } from "../middleware/verifyAdmin.js";
 router.post(`/signup`, createUser);
 router.post(`/signin`, loginUser);
 router.get("/home", userAuth, getUserInfo);
+router.delete("/user/delete", userAuth, deleteUser)
 
 router.get("/all-cards", userAuth, verifyAdmin, getAllCardInfo); 
 router.get("/cards", userAuth, getUserCards);
@@ -28,7 +30,5 @@ router.get("/contacts/:phone", userAuth, getUserSingleContact)
 router.post("/add-contact", userAuth, addContact)
 router.post("/pay-contact/:phone", userAuth, payContact)
 
-//router.get("/all-transactions", userAuth, verifyAdmin, getAllTransactions)
-//router.get("/all-transactions/:id", userAuth, verifyAdmin, getAllTransactionsSingle)
-//router.get("/transactions", userAuth, getUserTransactions)
-//router.get("/transactions/:id", userAuth, getTransaction)
+router.post("/new-transaction", userAuth, newTransaction)
+router.get("")

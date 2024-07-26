@@ -47,9 +47,11 @@ export const payContact = async (req, res, next) => {
     const contactToPay = await User.findOne({ phone });
     const transaction = await Transaction.create({
       createdBy: _id,
-      transactionName: "online transfer to" + contactToPay.username,
+      transactionName: "online transfer to " + contactToPay.username,
       transactionValue: value,
       transactionDate: Date.now(),
+      transactionRemainingInstallments: null,
+      transactionTimeInstallments: ""
     });
     user.balance -= value;
     contactToPay.balance += value;
