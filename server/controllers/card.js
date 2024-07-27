@@ -3,40 +3,39 @@ import { Card } from "../models/cardSchema.js";
 
 export const getAllCardInfo = async (req, res, next) => {
   try {
-    const cards = await Card.find()
-    res.send(cards)
-  } catch (error) {
-    res.send(error)
-  }
-}
-
-export const getUserCards = async (req, res, next) => {
-  try {
-    const {_id} = req.user.user
-    const cards = await Card.find({createdBy: _id});
+    const cards = await Card.find();
     res.send(cards);
   } catch (error) {
     res.send(error);
   }
 };
 
-
-export const createCard = async (req, res, next) => {
-  const securityCode = Math.floor(Math.random() * (999 - 10) + 10)
+export const getUserCards = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const {isCredit} = req.body
+    const cards = await Card.find({ createdBy: _id });
+    res.send(cards);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+export const createCard = async (req, res, next) => {
+  const securityCode = Math.floor(Math.random() * (999 - 10) + 10);
+  try {
+    const { _id } = req.user.user;
+    const { isCredit } = req.body;
     const user = await User.findById(_id);
+    const cards = await Card.find();
+    const cardsCreatedByUser = [];
     const newCard = await Card.create({
       createdBy: user._id,
-      cardNumber: "923712038791230", //create function to generate random string
+      cardNumber: "92371203879122", //create function to generate random string
       cardHolder: user.username,
       isCredit: isCredit,
       expiresIn: Date.now(),
       securityCode: securityCode,
     });
-    const sameUserCards = Card.filter((prop) => prop.createdBy == _id)
-    console.log(sameUserCards);
     res.send(newCard);
   } catch (error) {
     res.send(error);
@@ -45,21 +44,22 @@ export const createCard = async (req, res, next) => {
 
 export const updateCard = async (req, res, next) => {
   try {
-    const {id} = req.params
-    const card = await Card.findByIdAndUpdate(id, {$set: {cardNumber: 191172, expiresIn: Date.now()}}) //boilerplate
-    res.send(card)
+    const { id } = req.params;
+    const card = await Card.findByIdAndUpdate(id, {
+      $set: { cardNumber: 191172, expiresIn: Date.now() },
+    }); //boilerplate
+    res.send(card);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
-
+};
 
 export const deleteCard = async (req, res, next) => {
   try {
-    const {id} = req.params
-    const deletedCard = await Card.findByIdAndDelete(id)
-    res.send("deleted with success")
+    const { id } = req.params;
+    const deletedCard = await Card.findByIdAndDelete(id);
+    res.send("deleted with success");
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
+};

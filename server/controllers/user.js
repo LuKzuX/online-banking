@@ -56,14 +56,15 @@ export const getUserInfo = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const deletedUser = await User.findByIdAndDelete(_id)
     const users = await User.find();
-    const transactions = await Transaction.find();
-    const cards = await Card.find();
+    await User.findByIdAndDelete(_id);
+    await Transaction.deleteMany({ createdBy: _id });
+    await Card.deleteMany({ createdBy: _id });
     for (const user of users) {
       user.contacts = user.contacts.filter((prop) => prop.toString() !== _id);
       await user.save();
     }
+
     res.send(users);
   } catch (error) {
     res.send(error);
