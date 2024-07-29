@@ -6,7 +6,12 @@ export const getUserContacts = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
     const user = await User.findById(_id);
-    res.send(user.contacts);
+    const contacts = [];
+    for (let i = 0; i < user.contacts.length; i++) {
+      const contact = await User.findOne({ _id: user.contacts[i] });
+      contacts.push(contact);
+    }
+    res.send(contacts);
   } catch (error) {
     res.send(error);
   }
@@ -15,12 +20,16 @@ export const getUserContacts = async (req, res, next) => {
 export const getUserSingleContact = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const user = await User.findById(_id);
     const { phone } = req.params;
-    const contact = user.contacts.find((contact) =>
-      contact.find((contact) => contact.phone == phone)
-    );
-    res.send(contact);
+    const user = await User.findById(_id);
+    const contact = [];
+    for (let i = 0; i < user.contacts.length; i++) {
+      const userToFind = await User.findOne({ _id: user.contacts[i] });
+      if (userToFind.phone == phone) {
+        contact.push(userToFind);
+        res.send(contact);
+      }
+    }
   } catch (error) {
     res.send(error);
   }
@@ -63,5 +72,21 @@ export const payContact = async (req, res, next) => {
     res.send(transaction);
   } catch (error) {
     res.send(error);
+  }
+};
+
+export const deleteContact = async (req, res, next) => {
+  try {
+    const { _id } = req.user.user;
+    const { phone } = req.params;
+    const contactToDelete = await User.findOne({ phone });
+    const user = await User.findById(_id);
+    user.contacts = user.contacts.filter(
+      (el) => el.toString() !== contactToDelete._id.toString()
+    );
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    return res.send(error);
   }
 };

@@ -53,6 +53,23 @@ export const getUserInfo = async (req, res, next) => {
   }
 };
 
+export const updateUser = async (req, res, next) => {
+  try {
+    const { _id } = req.user.user;
+    const { username, phone, password } = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    const user = await User.findByIdAndUpdate(_id, {
+      username,
+      phone,
+      password: hashedPassword,
+    });
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export const deleteUser = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
