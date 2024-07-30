@@ -28,6 +28,7 @@ export const createCard = async (req, res, next) => {
     const user = await User.findById(_id);
     const cards = await Card.find();
     const cardsCreatedByUser = [];
+    const sameTypeCards = [];
     for (let i = 0; i < cards.length; i++) {
       if (cards[i].createdBy.toString() == _id) {
         cardsCreatedByUser.push(_id);
@@ -37,9 +38,18 @@ export const createCard = async (req, res, next) => {
       return res.send("only 2 cards per user");
     }
 
+    for (let j = 0; j < cards.length; j++) {
+      if (cards[j].createdBy.toString() == _id || sameTypeCards.length > 0) {
+        sameTypeCards.push(cards[j].isCredit);
+        if (sameTypeCards[0] == isCredit) {
+          return res.send("only one type of card per user");
+        }
+      }
+    }
+
     const newCard = await Card.create({
       createdBy: user._id,
-      cardNumber: "92371203879123", //create function to generate random string
+      cardNumber: "92371203879122", //create function to generate random string
       cardHolder: user.username,
       isCredit: isCredit,
       expiresIn: Date.now(),
