@@ -10,6 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggedMenuOpen, setIsLoggedMenuOpen] = useState(false);
   const { token } = useAuthContext();
 
   const toggleMenu1 = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full z-30 flex main-color text-white text-xl font-bold px-5 py-4">
+    <div className="w-full z-30 flex main-color text-white text-4xl font-bold px-5 py-4">
       <BsBank2 className="self-center" size={50} />
       <div className="flex items-center ml-auto gap-8 font-semibold">
         {!token && <BsPerson onClick={toggleMenu2} size={30} className="" />}
@@ -79,8 +80,15 @@ const Navbar = () => {
             </div>
           )}
           {token && (
-            <div className=" flex flex-col h-screen items-center justify-evenly">
-              <p onClick={() => navigate("/home")}>Home</p>
+            <div className="flex flex-col h-screen items-center justify-evenly">
+              <p
+                onClick={() => {
+                  navigate("/home");
+                  toggleMenu1();
+                }}
+              >
+                Home
+              </p>
               <p>Transactions</p>
               <p>Contacts</p>
               <p>Logout</p>

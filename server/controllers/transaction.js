@@ -26,7 +26,31 @@ export const getUserTransactions = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
     const transactions = Transaction.find({ createdBy: _id });
-    res.send(transactions);
+    res.send({ transactions });
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+export const getUserTransactionsChart = async (req, res, next) => {
+  try {
+    const { _id } = req.user.user;
+    const { chartYear } = req.body;
+    const transactions = await Transaction.find({ createdBy: _id });
+    const monthlyTotals = {};
+    for (let i = 0; i < transactions.length; i++) {
+      const date = new Date(transactions[i].transactionDate);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      if (year == chartYear.toString()) {
+        if (!monthlyTotals[month]) {
+          monthlyTotals[month] = 0; //creates a new key in the object
+        }
+        monthlyTotals[month] += transactions[i].transactionValue;
+      }
+    }
+
+    res.send(monthlyTotals);
   } catch (error) {
     res.send(error);
   }

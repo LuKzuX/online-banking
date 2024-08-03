@@ -24,6 +24,7 @@ import {
 import {
   newTransaction,
   getUserTransactions,
+  getUserTransactionsChart,
 } from "../controllers/transaction.js";
 import { userAuth } from "../middleware/userAuth.js";
 import { verifyAdmin } from "../middleware/verifyAdmin.js";
@@ -47,4 +48,5 @@ router.post("/pay-contact/:phone", userAuth, payContact);
 router.delete("/contacts/:phone", userAuth, deleteContact);
 
 router.post("/new-transaction", userAuth, newTransaction);
-router.get("");
+router.get("/transactions", userAuth, getUserTransactions);
+router.get("/chart", userAuth, getUserTransactionsChart);

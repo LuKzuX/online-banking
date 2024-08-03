@@ -4,11 +4,13 @@ import axios from "axios";
 import { useGetCurrentUser } from "../hooks/useGetCurrentUser";
 import { useGetUserCards } from "../hooks/useGetUserCards";
 import chip1 from "../images/chip1.png";
+import { Chart } from "../components/chart";
 
 export const Home = () => {
   const { token } = useAuthContext();
   const { user } = useGetCurrentUser();
   const { cardList } = useGetUserCards();
+ 
   return (
     <div className="">
       <div className="flex flex-col p-6 gap-10">
@@ -16,6 +18,7 @@ export const Home = () => {
           <h1>Balance:</h1>
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>
+        <Chart/>
         <div className="">
           <h1 className="text-2xl mb-5 text-center">Your Cards:</h1>
           <div className="flex flex-col gap-6 items-center">
