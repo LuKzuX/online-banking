@@ -49,4 +49,4 @@ router.delete("/contacts/:phone", userAuth, deleteContact);
 
 router.post("/new-transaction", userAuth, newTransaction);
 router.get("/transactions", userAuth, getUserTransactions);
-router.get("/chart", userAuth, getUserTransactionsChart);
+router.get("/chart/:chartYear", userAuth, getUserTransactionsChart);

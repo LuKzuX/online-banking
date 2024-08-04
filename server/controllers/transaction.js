@@ -35,9 +35,10 @@ export const getUserTransactions = async (req, res, next) => {
 export const getUserTransactionsChart = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const { chartYear } = req.body;
+    const { chartYear } = req.params;
     const transactions = await Transaction.find({ createdBy: _id });
     const monthlyTotals = {};
+    const monthlyTotalsArray = [];
     for (let i = 0; i < transactions.length; i++) {
       const date = new Date(transactions[i].transactionDate);
       const year = date.getFullYear();
@@ -49,8 +50,13 @@ export const getUserTransactionsChart = async (req, res, next) => {
         monthlyTotals[month] += transactions[i].transactionValue;
       }
     }
+    for (let j = 0; j < Object.keys(monthlyTotals).length; j++) {
+      const key = Object.keys(monthlyTotals)[j];
+      const value = Object.values(monthlyTotals)[j];
+      monthlyTotalsArray.push({ [key]: value });
+    }
 
-    res.send(monthlyTotals);
+    res.json(monthlyTotalsArray);
   } catch (error) {
     res.send(error);
   }
