@@ -23,8 +23,8 @@ export const Chart = () => {
     "dec",
   ];
 
-  const barWidth = 100;
-  const barMargin = 5;
+  const barWidth = 60;
+  const barMargin = 50;
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(null);
   const [greatestValue, setGreatestValue] = useState(0);
@@ -65,10 +65,10 @@ export const Chart = () => {
               return (
                 <Bar
                   key={el.month}
-                  x={index * (barWidth + barMargin + 100)}
+                  x={index * (barWidth + barMargin + 10)}
                   y={chartHeight - el.value}
                   width={barWidth}
-                  height={el.value }
+                  height={el.value}
                 />
               );
             })}
