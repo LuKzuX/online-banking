@@ -53,7 +53,7 @@ export const getUserTransactionsChart = async (req, res, next) => {
     for (let j = 0; j < Object.keys(monthlyTotals).length; j++) {
       const key = Object.keys(monthlyTotals)[j];
       const value = Object.values(monthlyTotals)[j];
-      monthlyTotalsArray.push({ [key]: value });
+      monthlyTotalsArray.push({ month: key, value: value });
     }
 
     res.json(monthlyTotalsArray);

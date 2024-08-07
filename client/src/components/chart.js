@@ -1,11 +1,34 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/authContext";
+import { Bar } from "./Bar";
 
 export const Chart = () => {
   const { token } = useAuthContext();
   const [data, setData] = useState("");
   const [chartYear, setChartYear] = useState("2024");
+  const monthNames = [
+    "",
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
+  ];
+
+  const barWidth = 100;
+  const barMargin = 5;
+  const [chartWidth, setChartWidth] = useState(0);
+  const [chartHeight, setChartHeight] = useState(null);
+  const [greatestValue, setGreatestValue] = useState(0);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -15,6 +38,10 @@ export const Chart = () => {
           },
         });
         setData(res.data);
+        const maxValue = Math.max(...data.map((el) => el.value));
+        setGreatestValue(maxValue);
+        setChartWidth(data.length * (barWidth + barMargin));
+        setChartHeight(greatestValue);
       } catch (error) {
         console.log(error);
       }
@@ -22,38 +49,31 @@ export const Chart = () => {
     getData();
   }, [token, chartYear]);
 
-  data && console.log(data);
-
-  const x1 = ["0%", "0%"];
-  const x2 = ["100%", "0%"];
-  const y1 = ["100%", "100%"];
-  const y2 = ["100%", "0%"];
   return (
     <div className="">
       <button onClick={() => setChartYear("2024")}>2024</button>
       <button onClick={() => setChartYear("2023")}>2023</button>
-      <svg width={"auto"} height={"364px"}>
-        <text x="5" y="15" fill="red">
-          I love SVG!
-        </text>
-        <line
-          x1={x1[0]}
-          x2={x2[0]}
-          y1={y1[0]}
-          y2={y2[0]}
-          stroke="black"
-          stroke-width="4"
-        />
-
-        <line
-          x1={x1[1]}
-          x2={x2[1]}
-          y1={y1[1]}
-          y2={y2[1]}
-          stroke="black"
-          stroke-width="4"
-        />
-      </svg>
+      <div className="relative w-full">
+        <svg
+          className="bg-neutral-200"
+          viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+          width={chartWidth}
+          height={400}
+        >
+          {data &&
+            data.map((el, index) => {
+              return (
+                <Bar
+                  key={el.month}
+                  x={index * (barWidth + barMargin + 100)}
+                  y={chartHeight - el.value}
+                  width={barWidth}
+                  height={el.value }
+                />
+              );
+            })}
+        </svg>
+      </div>
     </div>
   );
 };
