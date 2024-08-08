@@ -26,7 +26,7 @@ export const Chart = () => {
   const barWidth = 60;
   const barMargin = 50;
   const [chartWidth, setChartWidth] = useState(0);
-  const [chartHeight, setChartHeight] = useState(null);
+  const [chartHeight, setChartHeight] = useState(0);
   const [greatestValue, setGreatestValue] = useState(0);
 
   useEffect(() => {
@@ -38,10 +38,10 @@ export const Chart = () => {
           },
         });
         setData(res.data);
-        const maxValue = Math.max(...data.map((el) => el.value));
+        const maxValue = Math.max(...res.data.map((el) => el.value));
         setGreatestValue(maxValue);
-        setChartWidth(data.length * (barWidth + barMargin));
-        setChartHeight(greatestValue);
+        setChartWidth(res.data.length * (barWidth + barMargin));
+        setChartHeight(greatestValue * 1.05);
       } catch (error) {
         console.log(error);
       }
@@ -53,19 +53,19 @@ export const Chart = () => {
     <div className="">
       <button onClick={() => setChartYear("2024")}>2024</button>
       <button onClick={() => setChartYear("2023")}>2023</button>
-      <div className="relative w-full">
+      <div className="relative w-full overflow-x-auto">
         <svg
           className="bg-neutral-200"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
-          height={400}
+          height={"500"}
         >
           {data &&
             data.map((el, index) => {
               return (
                 <Bar
                   key={el.month}
-                  x={index * (barWidth + barMargin + 10)}
+                  x={index * (barWidth + barMargin)}
                   y={chartHeight - el.value}
                   width={barWidth}
                   height={el.value}
