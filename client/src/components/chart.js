@@ -41,7 +41,8 @@ export const Chart = () => {
         const maxValue = Math.max(...res.data.map((el) => el.value));
         setGreatestValue(maxValue);
         setChartWidth(res.data.length * (barWidth + barMargin));
-        setChartHeight(greatestValue * 1.05);
+        setChartHeight(greatestValue);
+        
       } catch (error) {
         console.log(error);
       }
