@@ -1,11 +1,26 @@
-export const Bar = ({x, y, height, width}) => {
-    return ( 
-        <>
-        <text x={x - 10} y={y - 10} fill="black">{height}</text>
-        <rect x={x} y={y} height={height} width={width} fill="teal"></rect>
-        </>
-     );
-}
-
-
-
+export const Bar = ({ x, y, height, width, arr1, arr2 }) => {
+  return (
+    <>
+      <text
+        x={height < 1000 ? x + 5 : x - 10}
+        y={y - 10}
+        fill="black"
+        fontSize={"60px"}
+      >
+        {height}
+      </text>
+      <g>
+        <rect x={x} y={y} height={height} width={width} fill="teal" />
+        <text
+          x={x + 15}
+          y={y + 70}
+          fontSize={50}
+          fill="white"
+          textAnchor="central"
+        >
+          {arr1[arr2]}
+        </text>
+      </g>
+    </>
+  );
+};
