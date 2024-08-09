@@ -12,9 +12,9 @@ export const Home = () => {
   const { cardList } = useGetUserCards();
  
   return (
-    <div className="">
+    <div className="bg-neutral-100">
       <div className="flex flex-col p-6 gap-10">
-        <div className="flex flex-col items-center border-2 rounded-xl p-3 text-2xl">
+        <div className="flex flex-col items-center border-2 rounded-xl p-3 text-2xl bg-white">
           <h1>Balance:</h1>
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>
