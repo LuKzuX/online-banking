@@ -23,7 +23,7 @@ export const Chart = () => {
     "dec",
   ];
 
-  const barWidth = 60;
+  const barWidth = 90;
   const barMargin = 50;
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(0);
@@ -37,12 +37,12 @@ export const Chart = () => {
             Authorization: `Bearer ${token.data.token}`,
           },
         });
+        const fetchedData = res.data;
         setData(res.data);
-        const maxValue = Math.max(...res.data.map((el) => el.value));
-        setGreatestValue(maxValue);
-        setChartWidth(res.data.length * (barWidth + barMargin));
-        setChartHeight(greatestValue);
-        
+        const maxValue = Math.max(...fetchedData.map((el) => el.value));
+        const chartHeight = maxValue + 100;
+        setChartHeight(chartHeight);
+        setChartWidth(fetchedData.length * (barWidth + barMargin));
       } catch (error) {
         console.log(error);
       }
@@ -51,15 +51,15 @@ export const Chart = () => {
   }, [token, chartYear]);
 
   return (
-    <div className="">
+    <div className="relative">
       <button onClick={() => setChartYear("2024")}>2024</button>
       <button onClick={() => setChartYear("2023")}>2023</button>
-      <div className="relative w-full overflow-x-auto">
+      <div className=" w-full overflow-x-auto">
         <svg
           className="bg-neutral-200"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
-          height={"500"}
+          height={"400"}
         >
           {data &&
             data.map((el, index) => {
@@ -75,6 +75,15 @@ export const Chart = () => {
             })}
         </svg>
       </div>
+      {data &&
+        data.map((el, index) => (
+          <p
+            className="absolute"
+            style={{ left: `${index * (barWidth + barMargin)}px`}}
+          >
+            {monthNames[el.month]}
+          </p>
+        ))}
     </div>
   );
 };
