@@ -65,11 +65,11 @@ export const Chart = () => {
       <div className="flex items-center justify-between">
         <div className="">
           <p className="text-black font-bold text-xl">Montly Expenses</p>
-          <div className="w-full h-[2px] bg-teal-600 mt-1"></div>
+          <div className="w-full h-[2px] main-color mt-1"></div>
         </div>
         <div className="relative ">
           <button
-            className="bg-teal-600 py-2 px-6 text-xl"
+            className="main-color py-2 px-6 text-xl"
             onClick={toggleYearMenu}
           >
             Select year:
@@ -77,12 +77,12 @@ export const Chart = () => {
           {yearMenu && (
             <div
               className="absolute flex flex-col items-center justify-center gap-4 left-[0%] shadow-xl
-           bg-teal-600 w-full p-5 text-white"
+           main-color w-full p-5 text-white"
             >
               {chartYearArray.map((el, index) => (
                 <div key={index} className="">
                   <button
-                    className="bg-teal-700 px-4 py-2 rounded-xl"
+                    className="main-color px-4 py-1 rounded-xl border-2"
                     onClick={() => {
                       setChartYear(el.year);
                       toggleYearMenu();
@@ -98,7 +98,7 @@ export const Chart = () => {
       </div>
       <div className="flex w-full overflow-x-auto mt-5">
         <svg
-          className="bg-white min-w-[100%] border-2"
+          className="bg-white min-w-[100%] border-2 rounded-xl"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
           height={"500px"}

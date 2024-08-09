@@ -19,9 +19,11 @@ export const Home = () => {
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>
         <Chart/>
-        <div className="">
-          <h1 className="text-2xl mb-5 text-center">Your Cards:</h1>
-          <div className="flex flex-col gap-6 items-center">
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl mb-5 text-center font-semibold">Your Cards:
+          <div className="w-full h-[2px] main-color mt-1"></div>
+          </h1>
+          <div className="flex flex-col gap-6 items-center bg-white py-6 w-full rounded-xl border-2">
             {cardList &&
               cardList.map((el) => (
                 <div

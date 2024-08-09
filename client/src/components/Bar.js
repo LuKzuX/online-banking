@@ -10,7 +10,7 @@ export const Bar = ({ x, y, height, width, arr1, arr2 }) => {
         {height}
       </text>
       <g>
-        <rect x={x} y={y} height={height} width={width} fill="teal" />
+        <rect x={x} y={y} height={height} width={width} fill="rgb(255, 98, 0, 1)" />
         <text
           x={x + 15}
           y={y + 70}
