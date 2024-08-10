@@ -50,10 +50,9 @@ export const CardDetails = () => {
           Authorization: `Bearer ${token.data.token}`,
         },
       });
-      navigate(`/home`)
+      navigate(`/home`);
     } catch (error) {
       console.log(error);
-      
     }
   };
 
@@ -111,8 +110,10 @@ export const CardDetails = () => {
           >
             {cardStatus ? "Enabled" : "Disabled"}
           </button>
-          <button className="text-white bg-red-800 px-6 py-3 rounded-xl shadow-md shadow-red-900"
-          onClick={deleteCard}>
+          <button
+            className="text-white bg-red-800 px-6 py-3 rounded-xl shadow-md shadow-red-900"
+            onClick={deleteCard}
+          >
             Delete card
           </button>
         </div>
