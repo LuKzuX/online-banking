@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { useAuthContext } from "../../context/authContext";
 import chip1 from "../../images/chip1.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const CardDetails = () => {
   const { token } = useAuthContext();
   const [cardInfo, setCardInfo] = useState("");
   const { id } = useParams();
   const [cardStatus, setCardStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCardData = async () => {
@@ -38,6 +40,20 @@ export const CardDetails = () => {
       setCardStatus(res.data.isActive);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const deleteCard = async () => {
+    try {
+      await axios.delete(`/bank/cards/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token.data.token}`,
+        },
+      });
+      navigate(`/home`)
+    } catch (error) {
+      console.log(error);
+      
     }
   };
 
@@ -84,16 +100,22 @@ export const CardDetails = () => {
             </div>
           </div>
         </div>
-        <button
-          className={`${
-            cardStatus
-              ? "bg-green-500 shadow-md shadow-green-500"
-              : "bg-red-500 shadow-md shadow-red-500"
-          } px-6 py-3 rounded-xl text-white`}
-          onClick={changeCardStatus}
-        >
-          {cardStatus ? "Enabled" : "Disabled"}
-        </button>
+        <div className="flex flex-col gap-6">
+          <button
+            className={`${
+              cardStatus
+                ? "bg-green-500 shadow-md shadow-green-500"
+                : "bg-red-500 shadow-md shadow-red-500"
+            } px-6 py-3 rounded-xl text-white`}
+            onClick={changeCardStatus}
+          >
+            {cardStatus ? "Enabled" : "Disabled"}
+          </button>
+          <button className="text-white bg-red-800 px-6 py-3 rounded-xl shadow-md shadow-red-900"
+          onClick={deleteCard}>
+            Delete card
+          </button>
+        </div>
       </div>
     </div>
   );
