@@ -20,6 +20,16 @@ export const getUserCards = async (req, res, next) => {
   }
 };
 
+export const getUserSingleCard = async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const card = await Card.findById(id)
+    res.send(card)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
 export const createCard = async (req, res, next) => {
   const securityCode = Math.floor(Math.random() * (999 - 10) + 10);
   try {

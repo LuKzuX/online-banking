@@ -5,9 +5,10 @@ import { useGetCurrentUser } from "../hooks/useGetCurrentUser";
 import { useGetUserCards } from "../hooks/useGetUserCards";
 import chip1 from "../images/chip1.png";
 import { Chart } from "../components/chart";
+import {useNavigate} from "react-router-dom"
 
 export const Home = () => {
-  const { token } = useAuthContext();
+  const navigate = useNavigate()
   const { user } = useGetCurrentUser();
   const { cardList } = useGetUserCards();
  
@@ -28,9 +29,9 @@ export const Home = () => {
               cardList.map((el) => (
                 <div
                   key={el._id}
-                  className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-neutral-400 to-neutral-500 rounded-lg shadow-lg"
+                  className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-600 to-blue-800 rounded-lg shadow-lg"
                 >
-                  <div className="absolute px-5 top-[10%]  text-white">
+                  <div onClick={() => navigate(`/card/${el._id}`)} className="absolute px-5 top-[10%]  text-white">
                     <p className="mb-3 font-semibold text-lg">Online Bank</p>
                     <img className=" h-[45px] " src={chip1}></img>
                     <p className="font-mono tracking-widest">{el.cardNumber}</p>

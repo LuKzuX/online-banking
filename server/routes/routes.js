@@ -9,8 +9,8 @@ import {
 } from "../controllers/user.js";
 import {
   createCard,
-  getAllCardInfo,
   getUserCards,
+  getUserSingleCard,
   updateCard,
   deleteCard,
 } from "../controllers/card.js";
@@ -35,8 +35,8 @@ router.get("/home", userAuth, getUserInfo);
 router.patch("/user/update", userAuth, updateUser);
 router.delete("/user/delete", userAuth, deleteUser);
 
-router.get("/all-cards", userAuth, verifyAdmin, getAllCardInfo);
 router.get("/cards", userAuth, getUserCards);
+router.get("/cards/:id", userAuth, getUserSingleCard)
 router.post("/add-card", userAuth, createCard);
 router.patch("/cards/:id", userAuth, updateCard);
 router.delete("/cards/:id", userAuth, deleteCard);

@@ -8,6 +8,7 @@ import { Home } from "./pages/home";
 import { AuthContextProvider } from "./context/authContext";
 import Navbar from "./components/Navbar";
 import { useAuthContext } from "./context/authContext";
+import { CardDetails } from "./pages/cardPages/cardDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/card/:id" element={<CardDetails/>}/>
         </Routes>
       </Router>
     </div>
