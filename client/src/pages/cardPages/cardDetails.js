@@ -83,7 +83,7 @@ export const CardDetails = () => {
           </div>
         </div>
       </div>
-      <button className={`${cardStatus ? "bg-green-500" : "bg-red-500"}`} onClick={changeCardStatus}>{cardStatus ? "Enabled" : "Disabled"}</button>
+      <button className={`${cardStatus ? "bg-green-500 shadow-md shadow-green-500" : "bg-red-500 shadow-md shadow-red-500"} px-6 py-3 rounded-xl text-white`} onClick={changeCardStatus}>{cardStatus ? "Enabled" : "Disabled"}</button>
     </div>
   );
 };
