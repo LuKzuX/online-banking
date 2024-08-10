@@ -34,7 +34,7 @@ router.post(`/signup`, createUser);
 router.post(`/signin`, loginUser);
 router.get("/home", userAuth, getUserInfo);
 router.patch("/user/update", userAuth, updateUser);
-router.delete("/user/delete", userAuth, deleteUser);
+router.delete("/user/delete", userAuth, deleteUser); 
 
 router.get("/cards", userAuth, getUserCards);
 router.get("/cards/:id", userAuth, getUserSingleCard)

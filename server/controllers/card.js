@@ -53,7 +53,7 @@ export const createCard = async (req, res, next) => {
       cardNumber: "92371203879122", //create function to generate random string
       cardHolder: user.username,
       isCredit: isCredit,
-      isActive: true,
+      isActive: true, 
       expiresIn: Date.now(),
       securityCode: securityCode,
     });
