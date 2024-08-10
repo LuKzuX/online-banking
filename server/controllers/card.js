@@ -1,15 +1,6 @@
 import { User } from "../models/userSchema.js";
 import { Card } from "../models/cardSchema.js";
 
-export const getAllCardInfo = async (req, res, next) => {
-  try {
-    const cards = await Card.find();
-    res.send(cards);
-  } catch (error) {
-    res.send(error);
-  }
-};
-
 export const getUserCards = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
