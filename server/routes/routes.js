@@ -13,6 +13,7 @@ import {
   getUserSingleCard,
   updateCard,
   deleteCard,
+  changeCardStatus,
 } from "../controllers/card.js";
 import {
   addContact,
@@ -38,7 +39,7 @@ router.delete("/user/delete", userAuth, deleteUser);
 router.get("/cards", userAuth, getUserCards);
 router.get("/cards/:id", userAuth, getUserSingleCard)
 router.post("/add-card", userAuth, createCard);
-router.patch("/cards/:id", userAuth, updateCard);
+router.patch("/cards/:id", userAuth, changeCardStatus);
 router.delete("/cards/:id", userAuth, deleteCard);
 
 router.get("/contacts", userAuth, getUserContacts);

@@ -20,7 +20,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/card/:id" element={<CardDetails/>}/>
+          <Route path="/cards/:id" element={<CardDetails/>}/>
         </Routes>
       </Router>
     </div>

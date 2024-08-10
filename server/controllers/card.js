@@ -53,6 +53,7 @@ export const createCard = async (req, res, next) => {
       cardNumber: "92371203879122", //create function to generate random string
       cardHolder: user.username,
       isCredit: isCredit,
+      isActive: true,
       expiresIn: Date.now(),
       securityCode: securityCode,
     });
@@ -61,6 +62,23 @@ export const createCard = async (req, res, next) => {
     res.send(error);
   }
 };
+
+export const changeCardStatus = async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const card = await Card.findById(id)
+    if (card.isActive == true) {
+      card.isActive = false
+      card.save()
+    }else{
+      card.isActive = true
+      card.save()
+    }
+    res.send(card)
+  } catch (error) {
+    res.send(error)
+  }
+}
 
 export const updateCard = async (req, res, next) => {
   try {

@@ -21,6 +21,11 @@ const cardSchema = new mongoose.Schema({
     required: true
   },
 
+  isActive: {
+    type: Boolean,
+    required: true
+  },
+
   expiresIn: {
     type: Date,
     required: true,

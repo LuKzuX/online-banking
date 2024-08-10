@@ -37,7 +37,7 @@ export const Home = () => {
                     className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-500 to-blue-800 rounded-lg shadow-lg"
                   >
                     <div
-                      onClick={() => navigate(`/card/${el._id}`)}
+                      onClick={() => navigate(`/cards/${el._id}`)}
                       className="py-2 px-5 top-[10%] text-white flex flex-col items-start"
                     >
                       <div className="w-full flex items-center justify-betwen text-sm">
