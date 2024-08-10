@@ -19,7 +19,7 @@ export const CardDetails = () => {
           },
         });
         setCardInfo(res.data);
-        setCardStatus(res.data.isActive.toString())
+        setCardStatus(res.data.isActive);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,7 @@ export const CardDetails = () => {
 
   const changeCardStatus = async () => {
     try {
-      const res = await axios.patch(`/bank/cards/${id}`,null, {
+      const res = await axios.patch(`/bank/cards/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token.data.token}`,
         },
@@ -46,44 +46,55 @@ export const CardDetails = () => {
   const month = date.getMonth();
 
   return (
-    <div className="flex flex-col items-center gap-8 mt-10">
-      <div className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-500 to-blue-800 rounded-lg shadow-lg">
-        <div className="py-2 px-5 top-[10%] text-white flex flex-col items-start">
-          <div className="w-full flex items-center justify-betwen text-sm">
-            <p>{cardInfo.isCredit ? "Credit Card" : "Debit Card"}</p>
-            <p className="ml-auto">Online Bank</p>
-          </div>
-          <div className="mt-4">
-            <img className=" h-[40px] " src={chip1}></img>
-            <p className="font-mono tracking-widest">{cardInfo.cardNumber}</p>
-          </div>
-          <div className="flex w-full items-center justify-between">
-            <p className="text-sm mt-3 self-start">{cardInfo.cardHolder}</p>
-            <p className=" text-sm mt-3">
-              {month < 10 ? `0${month} / ${year}` : month + " / " + year}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        key={cardInfo._id}
-        className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-500 to-blue-800 rounded-lg shadow-lg"
-      >
-        <div className="py-2  top-[10%] text-white flex flex-col items-start">
-          <div className="w-full h-10 mt-2  bg-black"></div>
-          <div className="px-6 flex items-center w-full mt-4">
-            <div className="flex flex-col items-center justify-around bg-yellow-100 h-9 w-[60%]">
-              <div className="w-full h-1 bg-neutral-200"></div>
-              <div className="w-full h-1 bg-neutral-200"></div>
-              <div className="w-full h-1 bg-neutral-200"></div>
+    <div className="bg-neutral-100 h-screen p-6">
+      <div className="flex flex-col items-center gap-8 mt-5 bg-white py-6 border-2 rounded-xl">
+        <div className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-500 to-blue-800 rounded-lg shadow-lg">
+          <div className="py-2 px-5 top-[10%] text-white flex flex-col items-start">
+            <div className="w-full flex items-center justify-betwen text-sm">
+              <p>{cardInfo.isCredit ? "Credit Card" : "Debit Card"}</p>
+              <p className="ml-auto">Online Bank</p>
             </div>
-            <div className="flex items-center justify-center bg-white h-6 w-[20%] text-black text-[10px] ">
-              {cardInfo.securityCode}
+            <div className="mt-4">
+              <img className=" h-[40px] " src={chip1}></img>
+              <p className="font-mono tracking-widest">{cardInfo.cardNumber}</p>
+            </div>
+            <div className="flex w-full items-center justify-between">
+              <p className="text-sm mt-3 self-start">{cardInfo.cardHolder}</p>
+              <p className=" text-sm mt-3">
+                {month < 10 ? `0${month} / ${year}` : month + " / " + year}
+              </p>
             </div>
           </div>
         </div>
+        <div
+          key={cardInfo._id}
+          className="relative h-[148px] w-[211.2px] bg-gradient-to-bl from-blue-500 to-blue-800 rounded-lg shadow-lg"
+        >
+          <div className="py-2  top-[10%] text-white flex flex-col items-start">
+            <div className="w-full h-10 mt-2  bg-black"></div>
+            <div className="px-6 flex items-center w-full mt-4">
+              <div className="flex flex-col items-center justify-around bg-yellow-100 h-9 w-[60%]">
+                <div className="w-full h-1 bg-neutral-200"></div>
+                <div className="w-full h-1 bg-neutral-200"></div>
+                <div className="w-full h-1 bg-neutral-200"></div>
+              </div>
+              <div className="flex items-center justify-center bg-white h-6 w-[20%] text-black text-[10px] ">
+                {cardInfo.securityCode}
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          className={`${
+            cardStatus
+              ? "bg-green-500 shadow-md shadow-green-500"
+              : "bg-red-500 shadow-md shadow-red-500"
+          } px-6 py-3 rounded-xl text-white`}
+          onClick={changeCardStatus}
+        >
+          {cardStatus ? "Enabled" : "Disabled"}
+        </button>
       </div>
-      <button className={`${cardStatus ? "bg-green-500 shadow-md shadow-green-500" : "bg-red-500 shadow-md shadow-red-500"} px-6 py-3 rounded-xl text-white`} onClick={changeCardStatus}>{cardStatus ? "Enabled" : "Disabled"}</button>
     </div>
   );
 };
