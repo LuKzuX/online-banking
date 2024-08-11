@@ -90,7 +90,7 @@ const Navbar = () => {
                 Home
               </p>
               <p onClick={() => navigate('/transactions')}>Transactions</p>
-              <p>Contacts</p>
+              <p onClick={() => navigate('/contacts')}>Contacts</p>
               <p>Logout</p>
             </div>
           )}

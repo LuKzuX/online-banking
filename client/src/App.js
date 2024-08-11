@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import { useAuthContext } from "./context/authContext";
 import { CardDetails } from "./pages/cardPages/cardDetails";
 import Transactions from "./pages/transactionPages/transactions";
+import { Contacts } from "./pages/contactPages/contacts";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/cards/:id" element={<CardDetails/>}/>
           <Route path="/transactions" element={<Transactions/>}/>
+          <Route path="/contacts" element={<Contacts/>}/>
         </Routes>
       </Router>
     </div>

@@ -41,9 +41,14 @@ export const addContact = async (req, res, next) => {
     const { phone } = req.body;
     const user = await User.findById(_id);
     const contactToAdd = await User.find({ phone });
+    for (let i = 0; i < user.contacts.length; i++) {
+      if (contactToAdd[0]._id.toString() == user.contacts[i].toString()) {
+        return res.send("you already have this contact added");
+      }
+    }
     user.contacts.push(contactToAdd[0]._id);
     await user.save();
-    res.send(user);
+    res.send(user.contacts);
   } catch (error) {
     res.send(error);
   }
