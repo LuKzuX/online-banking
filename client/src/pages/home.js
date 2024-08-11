@@ -22,7 +22,7 @@ export const Home = () => {
         <Chart />
         <div className="flex flex-col items-center">
           <h1 className="text-2xl mb-5 text-center font-semibold">
-            Your Cards:
+            Your Cards
             <div className="w-full h-[2px] main-color mt-1"></div>
           </h1>
           <div className="flex flex-col gap-6 items-center bg-white py-6 w-full rounded-xl border-2">

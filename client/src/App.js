@@ -9,6 +9,7 @@ import { AuthContextProvider } from "./context/authContext";
 import Navbar from "./components/Navbar";
 import { useAuthContext } from "./context/authContext";
 import { CardDetails } from "./pages/cardPages/cardDetails";
+import Transactions from "./pages/transactionPages/transactions";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Home />} />
           <Route path="/cards/:id" element={<CardDetails/>}/>
+          <Route path="/transactions" element={<Transactions/>}/>
         </Routes>
       </Router>
     </div>
