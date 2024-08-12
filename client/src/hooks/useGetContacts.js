@@ -22,7 +22,7 @@ export const useGetContacts = () => {
     };
 
     getData();
-  }, [token]);
+  }, [token, contacts]);
 
   return { contacts };
 };

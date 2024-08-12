@@ -1,16 +1,14 @@
 import "./styles.css";
-import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Signup } from "./pages/signup";
 import { Main } from "./pages/main";
 import { Signin } from "./pages/signin";
 import { Home } from "./pages/home";
-import { AuthContextProvider } from "./context/authContext";
 import Navbar from "./components/Navbar";
-import { useAuthContext } from "./context/authContext";
 import { CardDetails } from "./pages/cardPages/cardDetails";
 import Transactions from "./pages/transactionPages/transactions";
 import { Contacts } from "./pages/contactPages/contacts";
+import { PayContact } from "./pages/contactPages/payContact";
 
 function App() {
   return (
@@ -25,6 +23,7 @@ function App() {
           <Route path="/cards/:id" element={<CardDetails/>}/>
           <Route path="/transactions" element={<Transactions/>}/>
           <Route path="/contacts" element={<Contacts/>}/>
+          <Route path="/bank/pay-contact/:phone" element={<PayContact/>}/>
         </Routes>
       </Router>
     </div>
