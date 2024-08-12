@@ -89,8 +89,22 @@ const Navbar = () => {
               >
                 Home
               </p>
-              <p onClick={() => navigate('/transactions')}>Transactions</p>
-              <p onClick={() => navigate('/contacts')}>Contacts</p>
+              <p
+                onClick={() => {
+                  navigate("/transactions");
+                  toggleMenu1();
+                }}
+              >
+                Transactions
+              </p>
+              <p
+                onClick={() => {
+                  navigate("/contacts");
+                  toggleMenu1();
+                }}
+              >
+                Contacts
+              </p>
               <p>Logout</p>
             </div>
           )}
