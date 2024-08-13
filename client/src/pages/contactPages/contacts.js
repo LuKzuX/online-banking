@@ -11,7 +11,8 @@ export const Contacts = () => {
   const { token } = useAuthContext();
   const { contacts } = useGetContacts();
   const navigate = useNavigate();
-  const [addContactArea, setAddContactArea] = useState(false)
+  const [addContactArea, setAddContactArea] = useState(false);
+  const [phone, setPhone] = useState("");
 
   const deleteContact = async (phone) => {
     try {
@@ -20,6 +21,22 @@ export const Contacts = () => {
           Authorization: `Bearer ${token.data.token}`,
         },
       });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addContact = async (phone) => {
+    try {
+      await axios.post("/bank/add-contact", phone, {
+        headers: {
+          Authorization: `Bearer ${token.data.token}`,
+        },
+      });
+      console.log(phone);
+      
+      
     } catch (error) {
       console.log(error);
     }
@@ -39,10 +56,19 @@ export const Contacts = () => {
         )}
         {addContactArea && (
           <div>
-            <input type="number" placeholder="contact number"></input>
-            <button onClick={() => {
-              setAddContactArea(!true)
-            }}>add contact</button>
+            <input
+              onChange={(e) => setPhone(e.target.value)}
+              type="text"
+              placeholder="contact number"
+            ></input>
+            <button
+              onClick={() => {
+                setAddContactArea(!true);
+                addContact(phone);
+              }}
+            >
+              add contact
+            </button>
           </div>
         )}
       </div>
