@@ -59,7 +59,7 @@ export const CardDetails = () => {
   const date = new Date(cardInfo.expiresIn);
   const year = date.getFullYear();
   const month = date.getMonth();
-  
+
   const generateCardNumber = (string) => {
     let cardNumber = "";
     for (let i = 0; i < string.length; i++) {
@@ -82,7 +82,9 @@ export const CardDetails = () => {
             </div>
             <div className="mt-4">
               <img className=" h-[40px] " src={chip1}></img>
-              <p className="font-mono tracking-widest text-[12px]">{cardInfo && generateCardNumber(cardInfo.cardNumber)}</p>
+              <p className="font-mono tracking-widest text-[12px]">
+                {cardInfo && generateCardNumber(cardInfo.cardNumber)}
+              </p>
             </div>
             <div className="flex w-full items-center justify-between">
               <p className="text-sm mt-3 self-start">{cardInfo.cardHolder}</p>
