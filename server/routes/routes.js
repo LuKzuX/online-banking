@@ -11,7 +11,6 @@ import {
   createCard,
   getUserCards,
   getUserSingleCard,
-  updateCard,
   deleteCard,
   changeCardStatus,
 } from "../controllers/card.js";

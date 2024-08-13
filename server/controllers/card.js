@@ -48,9 +48,18 @@ export const createCard = async (req, res, next) => {
       }
     }
 
+    const generateCardNumber = () => {
+      let cardNumber = ""
+      for (let i = 0; i < 16; i++) {
+        const number = Math.floor(Math.random() * 10)
+        cardNumber += number.toString()
+      }
+      return cardNumber
+    }
+
     const newCard = await Card.create({
       createdBy: user._id,
-      cardNumber: "92371203879122", //create function to generate random string
+      cardNumber: generateCardNumber(), //create function to generate random string
       cardHolder: user.username,
       isCredit: isCredit,
       isActive: true, 
@@ -79,18 +88,6 @@ export const changeCardStatus = async (req, res, next) => {
     res.send(error)
   }
 }
-
-export const updateCard = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const card = await Card.findByIdAndUpdate(id, {
-      $set: { cardNumber: 191172, expiresIn: Date.now() },
-    }); //boilerplate
-    res.send(card);
-  } catch (error) {
-    res.send(error);
-  }
-};
 
 export const deleteCard = async (req, res, next) => {
   try {

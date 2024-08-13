@@ -31,6 +31,16 @@ export const Home = () => {
                 const date = new Date(el.expiresIn);
                 const year = date.getFullYear();
                 const month = date.getMonth();
+                const generateCardNumber = (string) => {
+                  let cardNumber = "";
+                  for (let i = 0; i < string.length; i++) {
+                    cardNumber += string[i];
+                    if (i == 3 || i == 7 || i == 11) {
+                      cardNumber += " ";
+                    }
+                  }
+                  return cardNumber;
+                };
                 return (
                   <div
                     key={el._id}
@@ -46,8 +56,8 @@ export const Home = () => {
                       </div>
                       <div className="mt-4">
                         <img className=" h-[40px] " src={chip1}></img>
-                        <p className="font-mono tracking-widest">
-                          {el.cardNumber}
+                        <p className="font-mono tracking-widest text-[12px]">
+                          {generateCardNumber(el.cardNumber)}
                         </p>
                       </div>
                       <div className="flex w-full items-center justify-between">
