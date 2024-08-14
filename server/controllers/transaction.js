@@ -25,7 +25,7 @@ export const newTransaction = async (req, res, next) => {
 export const getUserTransactions = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const transactions = await Transaction.find({ createdBy: _id });
+    const transactions = await Transaction.find({ createdBy: _id }).sort({transactionDate:-1})
     res.send( transactions );
   } catch (error) {
     res.send(error);
