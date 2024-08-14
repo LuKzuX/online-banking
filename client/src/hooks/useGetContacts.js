@@ -5,6 +5,7 @@ import axios from "axios";
 export const useGetContacts = () => {
   const [contacts, setContacts] = useState("");
   const { token } = useAuthContext();
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +23,11 @@ export const useGetContacts = () => {
     };
 
     getData();
-  }, [token, contacts]);
+  }, [token, refreshFlag]);
 
-  return { contacts };
+  const refreshContacts = () => {
+    setRefreshFlag(prev => !prev); // Toggle the flag to trigger useEffect
+  };
+
+  return { contacts, refreshContacts };
 };

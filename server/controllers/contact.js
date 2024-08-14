@@ -45,6 +45,9 @@ export const addContact = async (req, res, next) => {
       if (contactToAdd[0]._id.toString() == user.contacts[i].toString()) {
         return res.send("you already have this contact added");
       }
+      if (contactToAdd[0].phone == user.phone) {
+        return res.send("you cant add your own number")
+      }
     }
     user.contacts.push(contactToAdd[0]._id);
     await user.save();

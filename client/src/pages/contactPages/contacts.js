@@ -9,7 +9,7 @@ import { IoIosAdd } from "react-icons/io";
 
 export const Contacts = () => {
   const { token } = useAuthContext();
-  const { contacts } = useGetContacts();
+  const { contacts, refreshContacts } = useGetContacts();
   const navigate = useNavigate();
   const [addContactArea, setAddContactArea] = useState(false);
   const [phone, setPhone] = useState("");
@@ -21,7 +21,7 @@ export const Contacts = () => {
           Authorization: `Bearer ${token.data.token}`,
         },
       });
-
+      refreshContacts();
     } catch (error) {
       console.log(error);
     }
@@ -29,14 +29,16 @@ export const Contacts = () => {
 
   const addContact = async (phone) => {
     try {
-      await axios.post("/bank/add-contact", phone, {
-        headers: {
-          Authorization: `Bearer ${token.data.token}`,
-        },
-      });
-      console.log(phone);
-      
-      
+      await axios.post(
+        "/bank/add-contact",
+        { phone },
+        {
+          headers: {
+            Authorization: `Bearer ${token.data.token}`,
+          },
+        }
+      );
+      refreshContacts();
     } catch (error) {
       console.log(error);
     }
