@@ -57,13 +57,15 @@ export const Contacts = () => {
           </div>
         )}
         {addContactArea && (
-          <div>
+          <div className="flex items-center justify-around">
             <input
+            className="border-b-2 w-[40%]"
               onChange={(e) => setPhone(e.target.value)}
               type="text"
               placeholder="contact number"
             ></input>
             <button
+              className="py-1 px-3 border-2 rounded-xl bg-yellow-500 border-yellow-200 text-white"
               onClick={() => {
                 setAddContactArea(!true);
                 addContact(phone);
