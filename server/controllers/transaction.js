@@ -1,6 +1,7 @@
 import { User } from "../models/userSchema.js";
 import { Card } from "../models/cardSchema.js";
 import { Transaction } from "../models/transactionSchema.js";
+import { mongo } from "mongoose";
 
 export const newTransaction = async (req, res, next) => {
   try {
@@ -25,8 +26,10 @@ export const newTransaction = async (req, res, next) => {
 export const getUserTransactions = async (req, res, next) => {
   try {
     const { _id } = req.user.user;
-    const transactions = await Transaction.find({ createdBy: _id }).sort({transactionDate:-1})
-    res.send( transactions );
+    const transactions = await Transaction.find({ createdBy: _id }).sort({
+      transactionDate: -1,
+    });
+    res.send(transactions);
   } catch (error) {
     res.send(error);
   }
@@ -52,11 +55,21 @@ export const getUserTransactionsChart = async (req, res, next) => {
         monthlyTotals[month] += transactions[i].transactionValue;
       }
     }
+
+    for (let j = 1; j <= 12; j++) {
+      // Check if the month `j` exists in `monthlyTotals`
+      if (!monthlyTotals.hasOwnProperty(j.toString())) {
+        // If it doesn't exist, set it to 0
+        monthlyTotals[j.toString()] = 0;
+      }
+    }
+
     for (let j = 0; j < Object.keys(monthlyTotals).length; j++) {
       const key = Object.keys(monthlyTotals)[j];
       const value = Object.values(monthlyTotals)[j];
       monthlyTotalsArray.push({ month: key, value: value });
     }
+
     for (let i = 0; i < transactions.length; i++) {
       const date = new Date(transactions[i].transactionDate);
       const year = date.getFullYear();
@@ -70,6 +83,8 @@ export const getUserTransactionsChart = async (req, res, next) => {
       const key = Object.keys(allYears)[j];
       allYearsArray.push({ year: key });
     }
+
+    console.log(monthlyTotals);
 
     res.json({ monthlyTotalsArray, allYearsArray });
   } catch (error) {
