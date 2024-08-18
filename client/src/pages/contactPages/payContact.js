@@ -21,4 +21,4 @@ export const PayContact = () => {
       <button onClick={() => payContact(phone, value)}>Send</button>
     </div>
   );
-};
+}; 
