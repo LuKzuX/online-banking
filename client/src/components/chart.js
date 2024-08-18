@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/authContext";
+import { ChartContextProvider, useChartProvider } from "../context/chartContext";
 import { Bar } from "./Bar";
 
 export const Chart = () => {
   const { token } = useAuthContext();
-  const [data, setData] = useState("");
+  const {data, setData} = useChartProvider()
   const [chartYear, setChartYear] = useState(2024);
   const [chartYearArray, setChartYearArray] = useState("");
   const monthNames = [
@@ -24,11 +25,12 @@ export const Chart = () => {
     "dec",
   ];
 
-  const barWidth = 120;
+  let barWidth = 120;
   const barMargin = 50;
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(0);
   const [yearMenu, setYearMenu] = useState(false);
+  barWidth += (chartHeight / 100) + 120
 
   useEffect(() => {
     const getData = async () => {
@@ -42,7 +44,7 @@ export const Chart = () => {
         setData(res.data.monthlyTotalsArray);
         setChartYearArray(res.data.allYearsArray);
         const maxValue = Math.max(...fetchedData.map((el) => el.value));
-        const chartHeight = maxValue + 100;
+        const chartHeight = maxValue + 350;
         setChartHeight(chartHeight);
         setChartWidth(fetchedData.length * (barWidth + barMargin));
       } catch (error) {
@@ -98,7 +100,7 @@ export const Chart = () => {
       </div>
       <div className="flex w-full overflow-x-auto mt-5">
         <svg
-          className="bg-white min-w-[100%] border-2 rounded-xl"
+          className="bg-white min-w-[100%] border-2 rounded-xl overflow-x-auto"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
           height={"500px"}
@@ -109,12 +111,13 @@ export const Chart = () => {
               return (
                 <Bar
                   key={el.month}
-                  x={index * (barWidth + barMargin)}
+                  x={index * (barMargin + barWidth)}
                   y={chartHeight - el.value}
                   width={barWidth}
                   height={el.value}
                   arr1={monthNames}
                   arr2={el.month}
+                  fontSize={120}
                 />
               );
             })}
