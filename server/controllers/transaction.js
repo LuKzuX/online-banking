@@ -84,8 +84,6 @@ export const getUserTransactionsChart = async (req, res, next) => {
       allYearsArray.push({ year: key });
     }
 
-    console.log(monthlyTotals);
-
     res.json({ monthlyTotalsArray, allYearsArray });
   } catch (error) {
     res.send(error);

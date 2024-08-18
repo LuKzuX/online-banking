@@ -30,7 +30,7 @@ export const Chart = () => {
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(0);
   const [yearMenu, setYearMenu] = useState(false);
-  barWidth += (chartHeight / 100) + 120
+  barWidth += (chartHeight / 100) + 150
 
   useEffect(() => {
     const getData = async () => {
