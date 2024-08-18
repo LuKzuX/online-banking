@@ -1,14 +1,14 @@
-import { useChartProvider } from "../context/chartContext";
-
-export const Bar = ({ x, y, height, width, arr1, arr2, fonsize }) => {
-
+export const Bar = ({ x, y, height, width, arr1, arr2, fontSize }) => {
   return (
     <>
+      <text x={x + 40} y={y - 160} fontSize={fontSize} fill="black">
+        {arr1[arr2]}
+      </text>
       <text
-        x={height < 1000 ? x + 10 : x - 10}
+        x={height < 1000 ? x + 35 : x - 10}
         y={y - 10}
         fill="black"
-        fontSize={fonsize}
+        fontSize={fontSize}
       >
         {height}
       </text>

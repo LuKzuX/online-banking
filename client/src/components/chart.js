@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/authContext";
-import { useChartProvider } from "../context/chartContext";
+import { ChartContextProvider, useChartProvider } from "../context/chartContext";
 import { Bar } from "./Bar";
 
 export const Chart = () => {
   const { token } = useAuthContext();
-  const { data, setData } = useChartProvider();
+  const {data, setData} = useChartProvider()
   const [chartYear, setChartYear] = useState(2024);
   const [chartYearArray, setChartYearArray] = useState("");
   const monthNames = [
@@ -31,7 +31,7 @@ export const Chart = () => {
   const [chartHeight, setChartHeight] = useState(0);
   const [yearMenu, setYearMenu] = useState(false);
   if (chartHeight) {
-    barWidth += chartHeight / 100 + 120;
+    barWidth += (chartHeight / 100) + 120
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const Chart = () => {
         setData(res.data.monthlyTotalsArray);
         setChartYearArray(res.data.allYearsArray);
         const maxValue = Math.max(...fetchedData.map((el) => el.value));
-        const chartHeight = maxValue + 150;
+        const chartHeight = maxValue + 350;
         setChartHeight(chartHeight);
         setChartWidth(fetchedData.length * (barWidth + barMargin));
       } catch (error) {
@@ -100,13 +100,13 @@ export const Chart = () => {
           )}
         </div>
       </div>
-      <div className=" w-full overflow-x-auto mt-5 items-start justify-start">
+      <div className="flex w-full overflow-x-auto mt-5">
         <svg
           className="bg-white min-w-[100%] border-2 rounded-xl"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-          width={"100%"}
-          height={"500px"}
-          preserveAspectRatio="minXMidY meet"
+          width={chartWidth}
+          height={'500px'}
+          preserveAspectRatio="xMidYMax meet"
         >
           {data &&
             data.map((el, index) => {
@@ -119,31 +119,10 @@ export const Chart = () => {
                   height={el.value}
                   arr1={monthNames}
                   arr2={el.month}
-                  fonsize={chartHeight / 100 + 70}
+                  fontSize={120}
                 />
               );
             })}
-        </svg>
-        <svg
-          className="flex w-full overflow-x-auto mt-0 bg-neutral-100 min-w-[100%]"
-          viewBox={`0 0 ${chartWidth} ${250}`}
-          width={"100%"}
-          height={"20px"}
-          preserveAspectRatio="minXMidY meet"
-        >
-          {data &&
-            data.map((el, index) => (
-              <text
-                key={el.month}
-                textAnchor="middle"
-                fill="black"
-                fontSize={150}
-                x={(index + 0.6) * (barWidth + barMargin) - 50}
-                y={"150px"}
-              >
-                {monthNames[el.month]}
-              </text>
-            ))}
         </svg>
       </div>
     </div>
