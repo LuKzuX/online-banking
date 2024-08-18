@@ -30,9 +30,7 @@ export const Chart = () => {
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(0);
   const [yearMenu, setYearMenu] = useState(false);
-  if (chartHeight) {
-    barWidth += (chartHeight / 100) + 120
-  }
+  barWidth += (chartHeight / 100) + 120
 
   useEffect(() => {
     const getData = async () => {
@@ -102,10 +100,10 @@ export const Chart = () => {
       </div>
       <div className="flex w-full overflow-x-auto mt-5">
         <svg
-          className="bg-white min-w-[100%] border-2 rounded-xl"
+          className="bg-white min-w-[100%] border-2 rounded-xl overflow-x-auto"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
-          height={'500px'}
+          height={"500px"}
           preserveAspectRatio="xMidYMax meet"
         >
           {data &&
@@ -113,7 +111,7 @@ export const Chart = () => {
               return (
                 <Bar
                   key={el.month}
-                  x={index * (barWidth + barMargin)}
+                  x={index * (barMargin + barWidth)}
                   y={chartHeight - el.value}
                   width={barWidth}
                   height={el.value}
