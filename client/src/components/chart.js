@@ -98,9 +98,9 @@ export const Chart = () => {
           )}
         </div>
       </div>
-      <div className="flex overflow-x-auto mt-5">
+      <div className="flex items-center justify-center overflow-x-scroll mt-5 md:overflow-x-hidden lg:w-[70%] ">
         <svg
-          className="bg-white min-w-[100%] border-2 rounded-xl overflow-x-auto"
+          className="bg-white min-w-[140%] border-2 rounded-xl md:min-w-[100%]"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
           height={"500px"}
