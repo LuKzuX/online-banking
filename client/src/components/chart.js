@@ -64,12 +64,14 @@ export const Chart = () => {
 
   return (
     <div className="relative flex flex-col text-white">
-      <div className="flex items-center justify-between">
+      <div className=" max-w-[1024px]">
+        <div
+         className="flex w-full items-center justify-between">
         <div className="">
           <p className="text-black font-bold text-xl">Montly Expenses</p>
           <div className="w-full h-[2px] main-color mt-1"></div>
         </div>
-        <div className="relative ">
+        <div className="relative">
           <button
             className="main-color py-2 px-6 text-xl"
             onClick={toggleYearMenu}
@@ -98,9 +100,10 @@ export const Chart = () => {
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center overflow-x-scroll mt-5 md:overflow-x-hidden lg:w-[70%] ">
+      </div>
+      <div className="flex items-center justify-center overflow-x-auto mt-5 md:overflow-x-hidden ">
         <svg
-          className="bg-white min-w-[140%] border-2 rounded-xl md:min-w-[100%]"
+          className="bg-white border-2 rounded-xl lg:max-w-[1024px]"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
           width={chartWidth}
           height={"500px"}
