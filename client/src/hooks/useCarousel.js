@@ -89,17 +89,21 @@ export const useCarousel = () => {
             src={image}
             className="relative h-full w-screen object-cover brightness-50"
           />
-          <div className="absolute flex flex-col items-start gap-16 top-[25%] px-5">
-            <div className="flex flex-col gap-2">
-              <h1 className="text-2xl font-semibold">{textArr[index].title}</h1>
-              <div className="flex flex-col text-xl">
-                <h2>{textArr[index].text}</h2>
-                <h1>{textArr[index].textTwo}</h1>
+          <div className="max-w-[1024px] lg:mx-auto">
+            <div className="absolute flex flex-col items-start gap-16 top-[25%] px-5 lg:px-0">
+              <div className="flex flex-col gap-2">
+                <h1 className="text-2xl font-semibold">
+                  {textArr[index].title}
+                </h1>
+                <div className="flex flex-col text-xl">
+                  <h2>{textArr[index].text}</h2>
+                  <h1>{textArr[index].textTwo}</h1>
+                </div>
               </div>
+              <button className="border py-3 px-6 rounded-xl">
+                {textArr[index].bText}
+              </button>
             </div>
-            <button className="border py-3 px-6 rounded-xl">
-              {textArr[index].bText}
-            </button>
           </div>
         </div>
       ))}
