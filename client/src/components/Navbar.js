@@ -33,9 +33,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full z-30 flex main-color text-white text-4xl font-bold px-5 py-4 xl:justify-center">
-      <BsBank2 className="self-center" size={50} />
-      <div className="flex items-center ml-auto gap-8 font-semibold">
+    <div className="w-full z-30 flex main-color text-white text-4xl font-bold px-5 py-4 lg:justify-center">
+      <div className="flex w-full lg:max-w-[1024px]">
+      <BsBank2 className="self-start" size={50} />
+      <div className="flex justify-center items-center ml-auto gap-8 font-semibold">
         {!token && <BsPerson onClick={toggleMenu2} size={30} className="" />}
         <div
           className={`fixed inset-0 h-screen w-full main-color flex flex-col top-[0%] items-center justify-evenly z-10 transition-transform duration-500 
@@ -150,6 +151,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };
