@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/authContext";
-import { ChartContextProvider, useChartProvider } from "../context/chartContext";
+import {
+  ChartContextProvider,
+  useChartProvider,
+} from "../context/chartContext";
 import { Bar } from "./Bar";
 
 export const Chart = () => {
   const { token } = useAuthContext();
-  const {data, setData} = useChartProvider()
+  const { data, setData } = useChartProvider();
   const [chartYear, setChartYear] = useState(2024);
   const [chartYearArray, setChartYearArray] = useState("");
   const monthNames = [
@@ -30,7 +33,7 @@ export const Chart = () => {
   const [chartWidth, setChartWidth] = useState(0);
   const [chartHeight, setChartHeight] = useState(0);
   const [yearMenu, setYearMenu] = useState(false);
-  barWidth += (chartHeight / 100) + 150
+  barWidth += chartHeight / 100 + 150;
 
   useEffect(() => {
     const getData = async () => {
@@ -63,43 +66,42 @@ export const Chart = () => {
   };
 
   return (
-    <div className="relative flex flex-col text-white">
-      <div className=" max-w-[1024px]">
-        <div
-         className="flex w-full items-center justify-between">
-        <div className="">
-          <p className="text-black font-bold text-xl">Montly Expenses</p>
-          <div className="w-full h-[2px] main-color mt-1"></div>
-        </div>
-        <div className="relative">
-          <button
-            className="main-color py-2 px-6 text-xl"
-            onClick={toggleYearMenu}
-          >
-            Select year:
-          </button>
-          {yearMenu && (
-            <div
-              className="absolute flex flex-col items-center justify-center gap-4 left-[0%] shadow-xl
-           main-color w-full p-5 text-white"
+    <div className="relative flex flex-col text-white mx-auto">
+      <div className="max-w-[1024px] ">
+        <div className="flex w-full items-center justify-between">
+          <div className="">
+            <p className="text-black font-bold text-xl">Montly Expenses</p>
+            <div className="w-full h-[2px] main-color mt-1"></div>
+          </div>
+          <div className="relative">
+            <button
+              className="main-color py-2 px-6 text-xl"
+              onClick={toggleYearMenu}
             >
-              {chartYearArray.map((el, index) => (
-                <div key={index} className="">
-                  <button
-                    className="main-color px-4 py-1 rounded-xl border-2"
-                    onClick={() => {
-                      setChartYear(el.year);
-                      toggleYearMenu();
-                    }}
-                  >
-                    {el.year}
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+              Select year:
+            </button>
+            {yearMenu && (
+              <div
+                className="absolute flex flex-col items-center justify-center gap-4 left-[0%] shadow-xl
+           main-color w-full p-5 text-white"
+              >
+                {chartYearArray.map((el, index) => (
+                  <div key={index} className="">
+                    <button
+                      className="main-color px-4 py-1 rounded-xl border-2"
+                      onClick={() => {
+                        setChartYear(el.year);
+                        toggleYearMenu();
+                      }}
+                    >
+                      {el.year}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </div>
       <div className="flex items-center justify-center overflow-x-auto mt-5 md:overflow-x-hidden ">
         <svg
