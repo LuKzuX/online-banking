@@ -12,7 +12,7 @@ export const Main = () => {
   return (
     <div className="">
       {useCarousel()}
-      <div className="px-6 grid grid-cols-1 gap-10 mt-10">
+      <div className="px-6 max-w-[1024px] grid grid-cols-1 mx-auto gap-10 mt-10 md:grid-cols-2 lg:grid-cols-3">
         <div className="border border-neutral-300 rounded-xl px-4 py-6">
           <FaCreditCard size={30} className="mb-2" />
           <h1 className="text-2xl font-semibold">Title One</h1>
