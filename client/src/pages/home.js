@@ -14,8 +14,8 @@ export const Home = () => {
 
   return (
     <div className="bg-neutral-100">
-      <div className="flex flex-col  p-6 gap-10">
-        <div className="flex flex-col max-w-[1024px] items-center border-2 rounded-xl p-3 text-2xl bg-white">
+      <div className="flex flex-col p-6 gap-10 items-center">
+        <div className="flex flex-col max-w-[1024px] items-center border-2 rounded-xl py-3 px-12 text-2xl bg-white">
           <h1>Balance:</h1>
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>

@@ -66,8 +66,8 @@ export const Chart = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center mx-auto text-white mx-auto">
-      <div className="max-w-[1024px]">
+    <div className="relative flex flex-col justify-center text-white">
+      <div className="max-w-[1024px] mx-auto">
         <div className="flex w-full items-center justify-between">
           <div className="">
             <p className="text-black font-bold text-xl">Montly Expenses</p>
@@ -104,31 +104,30 @@ export const Chart = () => {
         </div>
       </div>
       <div className="flex justify-center mt-5 w-screen">
-  <div className="overflow-x-scroll max-w-[1024px] lg:overflow-x-hidden">
-    <svg
-      className="bg-white border-2 rounded-xl"
-      viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-      width={700}
-      height="500px"
-      preserveAspectRatio="xMidYMax meet"
-    >
-      {data &&
-        data.map((el, index) => (
-          <Bar
-            key={el.month}
-            x={index * (barMargin + barWidth)}
-            y={chartHeight - el.value}
-            width={barWidth}
-            height={el.value}
-            arr1={monthNames}
-            arr2={el.month}
-            fontSize={120}
-          />
-        ))}
-    </svg>
-  </div>
-</div>
-
+        <div className="overflow-x-scroll max-w-[1024px] lg:overflow-x-hidden">
+          <svg
+            className="bg-white border-2 rounded-xl"
+            viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+            width={700}
+            height="500px"
+            preserveAspectRatio="xMidYMax meet"
+          >
+            {data &&
+              data.map((el, index) => (
+                <Bar
+                  key={el.month}
+                  x={index * (barMargin + barWidth)}
+                  y={chartHeight - el.value}
+                  width={barWidth}
+                  height={el.value}
+                  arr1={monthNames}
+                  arr2={el.month}
+                  fontSize={120}
+                />
+              ))}
+          </svg>
+        </div>
+      </div>
     </div>
   );
 };
