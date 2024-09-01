@@ -68,7 +68,7 @@ export const Chart = () => {
   return (
     <div className="relative flex flex-col justify-center text-white">
       <div className="max-w-[1024px] mx-auto">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full justify-between">
           <div className="">
             <p className="text-black font-bold text-xl">Montly Expenses</p>
             <div className="w-full h-[2px] main-color mt-1"></div>
