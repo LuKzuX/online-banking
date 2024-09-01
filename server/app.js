@@ -13,7 +13,7 @@ app.use(errorHandlerMiddleware)
 const start = async () => {
   try {
     await connection(process.env.MONGO_URL)
-    app.listen(5000, () => {
+    app.listen(process.env.PORT || 5000, () => {
       console.log(`Server is listening`)
     })
   } catch (error) {
