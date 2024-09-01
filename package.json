@@ -1,0 +1,9 @@
+{
+  "homepage": "http://lukzux.github.io/online-banking/",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  },
+  "scripts": {
+    "deploy": "gh-pages -d build"
+  }
+}
