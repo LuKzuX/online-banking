@@ -15,7 +15,7 @@ export const Home = () => {
   return (
     <div className="bg-neutral-100">
       <div className="flex flex-col p-6 gap-10 items-center">
-        <div className="flex flex-col max-w-[1024px] items-center border-2 rounded-xl py-3 px-12 text-2xl bg-white">
+        <div className="flex flex-col text-center max-w-[1024px] border-2 rounded-xl py-3 px-16 text-2xl bg-white">
           <h1>Balance:</h1>
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>
@@ -25,7 +25,7 @@ export const Home = () => {
             Your Cards
             <div className="w-full h-[2px] main-color mt-1"></div>
           </h1>
-          <div className="flex flex-col gap-6 items-center bg-white py-6 w-full rounded-xl border-2">
+          <div className="flex flex-col gap-6 items-center bg-white py-6 px-16 w-full rounded-xl border-2">
             {cardList &&
               cardList.map((el) => {
                 const date = new Date(el.expiresIn);

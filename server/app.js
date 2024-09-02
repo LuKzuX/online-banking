@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
-import { connection } from "../server/db/connection.js"
+import { connection } from "./db/connection.js"
 const app = express()
 import { router } from "./routes/routes.js"
 import { errorHandlerMiddleware } from "./middleware/errorHandler.js"

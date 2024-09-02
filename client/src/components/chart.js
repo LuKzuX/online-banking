@@ -67,8 +67,8 @@ export const Chart = () => {
 
   return (
     <div className="relative flex flex-col justify-center text-white">
-      <div className="max-w-[1024px] mx-auto">
-        <div className="flex w-full justify-between">
+      <div className="flex justify-center">
+        <div className="w-[100%] flex justify-around items-center lg:w-[1024px]">
           <div className="">
             <p className="text-black font-bold text-xl">Montly Expenses</p>
             <div className="w-full h-[2px] main-color mt-1"></div>
@@ -103,7 +103,7 @@ export const Chart = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-5 w-screen">
+      <div className="flex justify-center mt-5 w-screen px-6">
         <div className="overflow-x-scroll max-w-[1024px] lg:overflow-x-hidden">
           <svg
             className="bg-white border-2 rounded-xl"
