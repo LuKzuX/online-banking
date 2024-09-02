@@ -15,7 +15,7 @@
   "rewrites": [
     {
       "source": "/server/index.js",
-      "destination": "http://bank/"
+      "destination": "/bank"
     }
   ]
 }
