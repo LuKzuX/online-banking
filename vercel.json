@@ -11,11 +11,5 @@
       "src": "/(.*)",
       "dest": "/server/index.js"
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/server/index.js",
-      "destination": "/bank"
-    }
   ]
 }
