@@ -13,9 +13,9 @@ export const Home = () => {
   const { cardList } = useGetUserCards();
 
   return (
-    <div className="bg-neutral-100">
-      <div className="flex flex-col p-6 gap-10 items-center">
-        <div className="flex flex-col text-center max-w-[1024px] border-2 rounded-xl py-3 px-16 text-2xl bg-white">
+    <div className="bg-neutral-100 flex justify-center">
+      <div className="flex flex-col p-6 gap-10 items-center max-w-[1024px]">
+        <div className="flex flex-col text-center  border-2 rounded-xl py-3 px-16 text-2xl bg-white">
           <h1>Balance:</h1>
           <h1 className="font-semibold">${user && user.user.balance}</h1>
         </div>
@@ -76,6 +76,9 @@ export const Home = () => {
               })}
           </div>
         </div>
+
+        
+
       </div>
     </div>
   );
