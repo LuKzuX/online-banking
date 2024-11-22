@@ -5,7 +5,13 @@ import { connection } from "./db/connection.js"
 const app = express()
 import { router } from "./routes/routes.js"
 import { errorHandlerMiddleware } from "./middleware/errorHandler.js"
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(`/bank`, router)
