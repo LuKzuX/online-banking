@@ -30,8 +30,11 @@ export const Signin = () => {
           setPassword(e.target.value);
         }}
       ></input>
-      <button onClick={handleSubmit}>Signup</button>
+      <button onClick={handleSubmit}>Signin</button>
+     
     </form>
+    <p>username: Lucas</p>
+    <p>password: 3</p>
   </div>
   )
 }

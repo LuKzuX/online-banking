@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const { token } = useAuthContext();
+  const { token, setToken } = useAuthContext();
 
   const toggleMenu1 = () => {
     if (isMenuOpen == false) {
@@ -45,7 +45,7 @@ const Navbar = () => {
           <IoMdClose onClick={toggleMenu2} size={40} className="self-end" />
           <div className="flex flex-col h-screen items-center justify-evenly">
             <p
-              className=""
+              className=" cursor-pointer"
               onClick={() => {
                 toggleMenu2();
                 navigate("/signin");
@@ -54,7 +54,7 @@ const Navbar = () => {
               Login
             </p>
             <p
-              className=""
+              className="cursor-pointer"
               onClick={() => {
                 toggleMenu2();
                 navigate("/signup");
@@ -80,6 +80,7 @@ const Navbar = () => {
          {token && (
           <div className="hidden lg:flex gap-24 text-2xl">
              <p
+             className="cursor-pointer"
                 onClick={() => {
                   navigate("/home");
 
@@ -87,7 +88,7 @@ const Navbar = () => {
               >
                 Home
               </p>
-              <p
+              <p     className="cursor-pointer"
                 onClick={() => {
                   navigate("/transactions");
 
@@ -95,7 +96,7 @@ const Navbar = () => {
               >
                 Transactions
               </p>
-              <p
+              <p     className="cursor-pointer"
                 onClick={() => {
                   navigate("/contacts");
 
@@ -103,8 +104,10 @@ const Navbar = () => {
               >
                 Contacts
               </p>
-              <p onClick={() => {
-                localStorage.removeItem("token")
+              <p     className="cursor-pointer" onClick={() => {
+                localStorage.removeItem("user")
+                setToken("")
+                navigate("/")
               }}>Logout</p>
           </div>
         )}
@@ -148,7 +151,11 @@ const Navbar = () => {
               >
                 Contacts
               </p>
-              <p>Logout</p>
+              <p onClick={() => {
+                localStorage.removeItem("user")
+                setToken("")
+                navigate("/")
+              }}>Logout</p>
             </div>
           )}
         </div>
