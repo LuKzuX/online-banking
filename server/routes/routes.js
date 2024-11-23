@@ -37,7 +37,7 @@ router.delete("/user/delete", userAuth, deleteUser);
 
 router.get("/cards", userAuth, getUserCards)
 router.get("/cards/:id", userAuth, getUserSingleCard)
-router.post("/add-card", userAuth, createCard)
+router.post("/home", userAuth, createCard)
 router.patch("/cards/:id", userAuth, changeCardStatus)
 router.delete("/cards/:id", userAuth, deleteCard)
 

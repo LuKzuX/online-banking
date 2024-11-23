@@ -103,7 +103,9 @@ const Navbar = () => {
               >
                 Contacts
               </p>
-              <p>Logout</p>
+              <p onClick={() => {
+                localStorage.removeItem("token")
+              }}>Logout</p>
           </div>
         )}
         <div

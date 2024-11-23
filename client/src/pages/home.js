@@ -11,6 +11,20 @@ export const Home = () => {
   const navigate = useNavigate();
   const { user } = useGetCurrentUser();
   const { cardList } = useGetUserCards();
+  const { token } = useAuthContext();
+
+  const handleSubmit = async () => {
+    try {
+      const newCard = await axios.post("/bank/home",null, {
+        headers: {
+          Authorization: `Bearer ${token.data.token}`,
+        },
+      });
+      console.log(newCard);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="bg-neutral-100">
@@ -74,6 +88,7 @@ export const Home = () => {
                   </div>
                 );
               })}
+            <button onClick={handleSubmit}>add card</button>
           </div>
         </div>
       </div>
